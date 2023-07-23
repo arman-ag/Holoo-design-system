@@ -16,7 +16,8 @@
     "prebuild": "yarn clean",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "refreshVSToken": "vsts-npm-auth -config .npmrc"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
