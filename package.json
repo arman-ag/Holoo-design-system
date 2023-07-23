@@ -9,7 +9,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "release": "standard-version && git push --follow-tags && npm publish",
     "build": "rollup -c --bundleConfigAsCjs",
     "watch": "rollup --watch -c --bundleConfigAsCjs",
     "clean": "rimraf ./dist",
@@ -72,7 +71,5 @@
       "optional": true
     }
   },
-  "description": "\"Just a test design system\"",
-  "repository": "git@github.com:arman-ag/learnstorybook-design-system.git",
   "author": "Arman-Ag"
 }
