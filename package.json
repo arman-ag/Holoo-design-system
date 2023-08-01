@@ -85,7 +85,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://172.16.16.41:8080/tfs/TNC_ITC/xeye/_git/xiFront"
+    "url": "https://github.com/arman-ag/npm-package"
   },
   "author": "Arman-Ag",
   "dependencies": {

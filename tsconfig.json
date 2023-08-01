@@ -1,4 +1,5 @@
 {
+  "include": ["src"],
   "compilerOptions": {
     "target": "es5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "module": "esnext" /* Specify what module code is generated. */,
@@ -6,7 +7,7 @@
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
     "strict": true /* Enable all strict type-checking options. */,
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "esnext"],
     "allowJs": true,
     "jsx": "react",
     "declaration": true,
@@ -19,12 +20,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "baseUrl": ".",
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@config/*": ["src/config/*"],
-      "@themes/*": ["src/themes/*"]
-    },
+    // "paths": {
+    //   "@components/*": ["src/components/*"],
+    //   "@config/*": ["src/config/*"],
+    //   "@themes/*": ["src/themes/*"]
+    // },
     "importHelpers": true
   },
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "stories"]
 }
