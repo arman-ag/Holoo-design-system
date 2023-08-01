@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "node_modules",
+    "dist",
+    "rollup.config.js",
+    "./src/themes",
+    "./src/**/*.stories.mdx",
+    "./src/**/*.stories.@(js|jsx|ts|tsx)",
+    "coverage",
+    "jest.config.js",
+    "jest-svg-transformer.js",
+    "./src/**/*.test.@(js|jsx|ts|tsx)",
+    "src/setupTests.ts",
+    "src/stories"
+  ]
+}

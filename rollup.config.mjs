@@ -1,14 +1,17 @@
 import commonjs from '@rollup/plugin-commonjs';
+import image from "@rollup/plugin-image";
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-
+import { visualizer } from "rollup-plugin-visualizer";
 // This is required to read package.json file when
 // using Native ES modules in Node.js
 // https://rollupjs.org/command-line-interface/#importing-package-json
 import typescript from '@rollup/plugin-typescript';
 import { createRequire } from 'node:module';
+import { dts } from "rollup-plugin-dts";
 import postcss from "rollup-plugin-postcss";
+
 
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
@@ -30,11 +33,15 @@ export default [
       },
     ],
     plugins: [
+      visualizer(),
       peerDepsExternal(),
       resolve({
         extensions: ['.js', '.jsx'],
       }),
-      typescript(),
+      typescript({
+        tsconfig: "./tsconfig.build.json",
+        useTsconfigDeclarationDir: true,
+      }),
       postcss({
         config: {
           modules: true,
@@ -48,8 +55,14 @@ export default [
       }),
       commonjs(),
       terser(),
-
+      image(),
     ],
-    external: ['react', 'react-dom', '@emotion/react', '@emotion/styled'],
+    external: ['react', 'react-dom'],
+  },
+  {
+    input: "dist/types/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "esm" }],
+    plugins: [dts()],
+    external: [/\.css$/],
   },
 ];
