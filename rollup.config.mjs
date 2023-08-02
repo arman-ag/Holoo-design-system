@@ -1,16 +1,12 @@
 import commonjs from '@rollup/plugin-commonjs';
 import image from "@rollup/plugin-image";
 import resolve from '@rollup/plugin-node-resolve';
-import terser from '@rollup/plugin-terser';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import { visualizer } from "rollup-plugin-visualizer";
-// This is required to read package.json file when
-// using Native ES modules in Node.js
-// https://rollupjs.org/command-line-interface/#importing-package-json
-import typescript from '@rollup/plugin-typescript';
 import { createRequire } from 'node:module';
 import { dts } from "rollup-plugin-dts";
+import esbuild from 'rollup-plugin-esbuild';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from "rollup-plugin-postcss";
+import { visualizer } from "rollup-plugin-visualizer";
 
 
 const requireFile = createRequire(import.meta.url);
@@ -18,27 +14,53 @@ const packageJson = requireFile('./package.json');
 
 export default [
   {
+
+    treeshake: true,
     input: 'src/index.ts',
     output: [
       {
         file: packageJson.main,
         format: 'cjs',
         sourcemap: true,
+        // preserveModules: true,
+        // preserveModulesRoot: "src",
+        exports: "named",
       },
       {
         file: packageJson.module,
         format: 'esm',
-        exports: 'named',
+        // preserveModules: true,
+        // preserveModulesRoot: "src",
         sourcemap: true,
       },
     ],
     plugins: [
+      esbuild({  // All options are optional
+        include: /\.[jt]sx?$/, // default, inferred from `loaders` option
+        exclude: ["node_modules", "stories"], // default
+        sourceMap: true, // default
+        minify: true,
+        target: 'esnext', // default, or 'es20XX', 'esnext'
+        jsx: 'transform', // default, or 'preserve'
+        jsxFactory: 'React.createElement',
+        jsxFragment: 'React.Fragment',
+        // Like @rollup/plugin-replace
+        define: {
+          __VERSION__: '"x.y.z"',
+        },
+        tsconfig: 'tsconfig.json', // default
+        // Add extra loaders
+        loaders: {
+          // Add .json files support
+          // require @rollup/plugin-commonjs
+          '.json': 'json',
+          // Enable JSX in .js files too
+          '.js': 'jsx',
+        },
+      }),
       visualizer(),
       peerDepsExternal(),
-      resolve({
-        extensions: ['.js', '.jsx'],
-      }),
-      typescript(),
+      resolve({}),
       postcss({
         config: {
           modules: true,
@@ -51,13 +73,12 @@ export default [
         },
       }),
       commonjs(),
-      terser(),
       image(),
     ],
     external: ['react', 'react-dom'],
   },
   {
-    input: "dist/esm/types/index.d.ts",
+    input: "src/index.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
     external: [/\.css$/],
