@@ -1,4 +1,4 @@
-import { CustomButton } from '../src/CustomButton/CustomButton';
+import { CustomButton } from '../src/components/CustomButton';
 export default {
   title: 'CustomButton',
   component: CustomButton,
