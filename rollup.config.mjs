@@ -22,15 +22,11 @@ export default [
         file: packageJson.main,
         format: 'cjs',
         sourcemap: true,
-        // preserveModules: true,
-        // preserveModulesRoot: "src",
         exports: "named",
       },
       {
         file: packageJson.module,
         format: 'esm',
-        // preserveModules: true,
-        // preserveModulesRoot: "src",
         sourcemap: true,
       },
     ],
@@ -49,14 +45,6 @@ export default [
           __VERSION__: '"x.y.z"',
         },
         tsconfig: 'tsconfig.json', // default
-        // Add extra loaders
-        loaders: {
-          // Add .json files support
-          // require @rollup/plugin-commonjs
-          '.json': 'json',
-          // Enable JSX in .js files too
-          '.js': 'jsx',
-        },
       }),
       visualizer(),
       peerDepsExternal(),
