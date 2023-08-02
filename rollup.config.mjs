@@ -38,10 +38,7 @@ export default [
       resolve({
         extensions: ['.js', '.jsx'],
       }),
-      typescript({
-        tsconfig: "./tsconfig.build.json",
-        useTsconfigDeclarationDir: true,
-      }),
+      typescript(),
       postcss({
         config: {
           modules: true,
@@ -60,7 +57,7 @@ export default [
     external: ['react', 'react-dom'],
   },
   {
-    input: "dist/types/index.d.ts",
+    input: "dist/esm/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
     external: [/\.css$/],
