@@ -1,6 +1,6 @@
 {
   "name": "@test-design/learnstorybook-design-system-template",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "./dist/index.d.ts",
@@ -9,6 +9,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "release": "standard-version && git push --follow-tags && npm publish",
     "size": "size-limit",
     "build": "rollup -c",
     "watch": "rollup --watch -c --bundleConfigAsCjs",
