@@ -1,2 +1,2 @@
-export * from './CustomButton';
+export * from './buttons';
 export * from './input';
