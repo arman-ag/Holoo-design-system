@@ -1,14 +1,13 @@
 import commonjs from '@rollup/plugin-commonjs';
-import image from "@rollup/plugin-image";
+import image from '@rollup/plugin-image';
 import resolve from '@rollup/plugin-node-resolve';
+import svgr from "@svgr/rollup";
 import { createRequire } from 'node:module';
 import { dts } from "rollup-plugin-dts";
 import esbuild from 'rollup-plugin-esbuild';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from "rollup-plugin-postcss";
 import { visualizer } from "rollup-plugin-visualizer";
-
-
 const requireFile = createRequire(import.meta.url);
 const packageJson = requireFile('./package.json');
 
@@ -32,11 +31,12 @@ export default [
     ],
     plugins: [
       esbuild({  // All options are optional
-        include: /\.[jt]sx?$/, // default, inferred from `loaders` option
+        include: ["./src/**/*"],// default, inferred from `loaders` option
         exclude: ["node_modules", "stories"], // default
         sourceMap: true, // default
         minify: true,
-        target: 'esnext', // default, or 'es20XX', 'esnext'
+        target: 'esnext',
+        tsconfig: 'tsconfig.json', // default, or 'es20XX', 'esnext'
         jsx: 'transform', // default, or 'preserve'
         jsxFactory: 'React.createElement',
         jsxFragment: 'React.Fragment',
@@ -62,6 +62,7 @@ export default [
       }),
       commonjs(),
       image(),
+      svgr({ exportType: "named" }),
     ],
     external: ['react', 'react-dom'],
   },
