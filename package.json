@@ -1,6 +1,6 @@
 {
   "name": "@test-design/learnstorybook-design-system-template",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "./dist/index.d.ts",
@@ -50,6 +50,7 @@
     "@storybook/react": "7.1.0",
     "@storybook/react-vite": "7.1.0",
     "@storybook/testing-library": "0.2.0",
+    "@svgr/rollup": "^8.0.1",
     "@vitejs/plugin-react": "^3.1.0",
     "auto": "^10.46.0",
     "autoprefixer": "^10.4.14",
