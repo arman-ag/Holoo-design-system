@@ -11,36 +11,7 @@ module.exports = {
     //   },
     // },
 
-    colors: {
-      light: {
-        secondary: {
-          10: "#E8F4FB",
-          20: "#D1E9F7",
-          40: "#A3D2F0",
-          50: "#8CC7EC",
-          90: "#319ADD",
-          100: "#1A8FD9",
-          120: "#1572AE",
-          130: "#126498",
 
-        },
-        gray: {
-          text: "#F4F4F4"
-        },
-      },
-      dark: {
-        secondary: {
-          70: "#5FB1E4",
-          60: "#76BCE8",
-          50: "#8CC7EC",
-        },
-        gray: {
-          text: "#191919"
-        }
-      }
-
-
-    },
     borderRadius: {
       lg: `var(--radius)`,
       md: `calc(var(--radius) - 2px)`,
@@ -69,6 +40,34 @@ module.exports = {
       },
       colors: {
 
+        light: {
+          secondary: {
+            10: "#E8F4FB",
+            20: "#D1E9F7",
+            40: "#A3D2F0",
+            50: "#8CC7EC",
+            90: "#319ADD",
+            100: "#1A8FD9",
+            120: "#1572AE",
+            130: "#126498",
+
+          },
+          gray: {
+            text: "#F4F4F4"
+          },
+        },
+        dark: {
+          secondary: {
+            70: "#5FB1E4",
+            60: "#76BCE8",
+            50: "#8CC7EC",
+            160: "#0A3957",
+            130: "#126498",
+          },
+          gray: {
+            text: "#191919"
+          }
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -105,6 +104,7 @@ module.exports = {
       },
 
       fontFamily: {
+        yekan: 'Yekan',
         // sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       keyframes: {
