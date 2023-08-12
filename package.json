@@ -91,16 +91,19 @@
   },
   "author": "Arman-Ag",
   "dependencies": {
+    "@radix-ui/react-label": "^2.0.2",
     "@size-limit/preset-small-lib": "^8.2.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cssnano": "^6.0.1",
     "esbuild": "^0.18.17",
     "primereact": "^9.6.0",
+    "react-hook-form": "^7.45.4",
     "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-postcss": "^4.0.2",
     "size-limit": "^8.2.6",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.6"
+    "tailwindcss-animate": "^1.0.6",
+    "zod": "^3.21.4"
   }
 }

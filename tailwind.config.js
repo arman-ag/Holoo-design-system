@@ -12,12 +12,14 @@ module.exports = {
     // },
 
 
-    borderRadius: {
-      lg: `var(--radius)`,
-      md: `calc(var(--radius) - 2px)`,
-      16: "1rem",
-    },
+
     extend: {
+      borderRadius: {
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        16: "1rem",
+        8: ".5rem"
+      },
       spacing: {
         335: '20.938rem',
         48: '3rem',
@@ -29,6 +31,8 @@ module.exports = {
         40: "2.5rem",
         225: "14.063rem",
         44: "2.75rem",
+        32: "2rem",
+
 
       },
       padding: {
@@ -52,8 +56,15 @@ module.exports = {
             130: "#126498",
 
           },
+          error: {
+            120: "#B9172B",
+            100: "#E71D36",
+            80: "#EC4A5E",
+
+          },
           gray: {
-            text: "#F4F4F4"
+            text: "#F4F4F4",
+            inactivestates: "#A0A4A8"
           },
         },
         dark: {
@@ -63,6 +74,9 @@ module.exports = {
             50: "#8CC7EC",
             160: "#0A3957",
             130: "#126498",
+          },
+          error: {
+            100: "#EC4A5E"
           },
           gray: {
             text: "#191919"

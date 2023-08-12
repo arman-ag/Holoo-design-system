@@ -1,6 +1,9 @@
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
   stories: ['../stories/*.mdx', '../stories/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  core: {
+    builder: '@storybook/builder-vite', // 👈 The builder enabled here.
+  },
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
