@@ -31,7 +31,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       if (type === 'password') {
         return showPassword ? (
           <span
-            className='cursor-pointer text-dark-gray-text'
+            className='cursor-pointer text-dark-gray-text dark:text-light-secondary-100'
             onClick={() => {
               setShowPassword(false);
             }}
@@ -63,7 +63,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </span>
         ) : (
           <span
-            className='cursor-pointer text-dark-gray-text'
+            className='cursor-pointer text-dark-gray-text dark:text-light-secondary-100'
             onClick={() => {
               setShowPassword(true);
             }}
@@ -139,7 +139,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               id={formItemId}
               type={showPassword ? 'text' : type}
               className={cn(
-                ' text-base px-16 transition-colors  focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text',
+                'bg-inherit	 text-base px-16   focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text dark:text-light-secondary-100',
                 className,
               )}
               ref={ref}
