@@ -118,9 +118,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           disabled && 'opacity-50',
         )}
       >
-        <FormLabel
-          className={cn('text-sm  my-8 mx-16 ', disabled && 'opacity-50 ')}
-        >
+        <FormLabel className={cn('text-sm  mx-16 ', disabled && 'opacity-50 ')}>
           {label}
         </FormLabel>
         <FormControl>
@@ -139,7 +137,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               id={formItemId}
               type={showPassword ? 'text' : type}
               className={cn(
-                'bg-inherit	 text-base px-16   focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text dark:text-light-gray-inactivestates',
+                'bg-inherit	 my-8 text-base    focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text dark:text-light-gray-inactivestates',
                 className,
               )}
               ref={ref}

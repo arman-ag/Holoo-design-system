@@ -79,13 +79,18 @@ module.exports = {
 
           },
           gray: {
+            secondarytext: "#52575C",
             text: "#F4F4F4",
             line: "#E0E0E0",
-            inactivestates: "#A0A4A8"
+            inactivestates: "#A0A4A8",
+            textfield: "#CACCCF",
+            disable: "#EFEFEF"
+
           },
         },
         dark: {
           secondary: {
+            2: "#192025",
             70: "#5FB1E4",
             60: "#76BCE8",
             50: "#8CC7EC",
@@ -93,10 +98,13 @@ module.exports = {
             130: "#126498",
           },
           error: {
-            100: "#EC4A5E"
+            100: "#EC4A5E",
+
           },
           gray: {
-            text: "#191919"
+            text: "#191919",
+            inactivestates: "#939698",
+            secondarytext: "#C3C5C6"
           }
         },
         border: "hsl(var(--border))",
