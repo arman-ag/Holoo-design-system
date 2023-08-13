@@ -1,8 +1,27 @@
 /** @type { import('@storybook/react-vite').StorybookConfig } */
+const svgrPlugin = require('vite-plugin-svgr').default
 const config = {
+
   stories: ['../stories/*.mdx', '../stories/*.stories.@(js|jsx|mjs|ts|tsx)'],
   core: {
     builder: '@storybook/builder-vite', // 👈 The builder enabled here.
+  },
+  async viteFinal(config) {
+    config.plugins = [
+      ...config.plugins,
+      svgrPlugin({
+        exclude: "",
+        include: "**/*.svg",
+        svgrOptions: {
+          icon: true,
+        },
+      })
+    ];
+
+    // return the customized config
+    return config;
+    // Merge custom configuration into the default config
+
   },
   addons: [
     '@storybook/addon-links',

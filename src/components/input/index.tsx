@@ -4,10 +4,10 @@
 import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 import { cn } from '../../lib/utils';
-import { useFormField } from '../form';
-
+import { FormControl, FormLabel, FormMessage, useFormField } from '../form';
+import CloseEye from './../../assets/icons/closeeye.svg';
 const inputVariants = cva(
-  'font-yekan  flex items-center w-full rounded-8 border border-light-gray-inactivestates active:border-light-secondary-100 focus-within:border-dark-gray-text ',
+  ' flex items-center w-full rounded-8 border border-light-gray-inactivestates focus-within:border-light-secondary-100 active:border-dark-gray-text my-8 ',
   {
     variants: {
       size: { sm: 'h-32 py-8 px-12 ', md: 'h-40 py-12 px-16', lg: 'p-16 h-48' },
@@ -23,80 +23,82 @@ export interface InputProps
     VariantProps<typeof inputVariants> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, size, type, name, ...props }, ref) => {
+  ({ label, className, size, dir, type, name, ...props }, ref) => {
     const [showPassword, setShowPassword] = React.useState(false);
     const { error, formItemId } = useFormField();
 
-    const changeIcon = () => {
+    const changeAction = () => {
       switch (type) {
         case 'password':
           return showPassword ? (
-            <button
+            <span
+              className='cursor-pointer text-dark-gray-text'
               onClick={() => {
                 setShowPassword(false);
               }}
             >
-              <svg
-                width='40'
-                height='40'
-                viewBox='0 0 40 40'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  fill-rule='evenodd'
-                  clip-rule='evenodd'
-                  d='M27.5 19.8C26.3 16.7 23.3 14.6 20 14.5C16.7 14.6 13.7 16.7 12.5 19.8V20.1C13.7 23.2 16.6 25.3 20 25.4C23.3 25.3 26.3 23.2 27.5 20.1V19.8ZM17 20C17 18.3 18.3 17 20 17C21.7 17 23 18.3 23 20C23 21.7 21.7 23 20 23C18.3 23 17 21.7 17 20ZM18 20C18 21.1 18.9 22 20 22C21.1 22 22 21.1 22 20C22 18.9 21.1 18 20 18C18.9 18 18 18.9 18 20ZM13.5 20C14.6 22.5 17.3 24.5 20 24.5C22.6 24.5 25.4 22.5 26.5 20C25.4 17.5 22.7 15.5 20 15.5C17.3 15.5 14.5 17.5 13.5 20Z'
-                  fill='currentColor'
-                />
-              </svg>
-            </button>
+              <CloseEye />
+            </span>
           ) : (
-            <button
+            <span
+              className='cursor-pointer text-dark-gray-text'
               onClick={() => {
                 setShowPassword(true);
               }}
             >
               <svg
-                width='40'
-                height='40'
-                viewBox='0 0 40 40'
+                width='16'
+                height='16'
+                viewBox='0 0 16 16'
+                fill='none'
                 xmlns='http://www.w3.org/2000/svg'
               >
+                <circle cx='7.545' cy='7.545' r='2.045' stroke='#191919' />
                 <path
-                  fill-rule='evenodd'
-                  clip-rule='evenodd'
-                  d='M27.5 19.8C26.3 16.7 23.3 14.6 20 14.5C16.7 14.6 13.7 16.7 12.5 19.8V20.1C13.7 23.2 16.6 25.3 20 25.4C23.3 25.3 26.3 23.2 27.5 20.1V19.8ZM17 20C17 18.3 18.3 17 20 17C21.7 17 23 18.3 23 20C23 21.7 21.7 23 20 23C18.3 23 17 21.7 17 20ZM18 20C18 21.1 18.9 22 20 22C21.1 22 22 21.1 22 20C22 18.9 21.1 18 20 18C18.9 18 18 18.9 18 20ZM13.5 20C14.6 22.5 17.3 24.5 20 24.5C22.6 24.5 25.4 22.5 26.5 20C25.4 17.5 22.7 15.5 20 15.5C17.3 15.5 14.5 17.5 13.5 20Z'
-                  fill='currentColor'
+                  d='M7.56285 11.9091C10.8348 11.9091 13.8213 7.81073 13.8213 7.81073C13.8213 7.81073 13.9615 7.30472 13.8213 7.09836C13.8213 7.09836 11.0115 3 7.56285 3C4.11419 3 1.30439 7.09836 1.30439 7.09836C1.16416 7.30472 1.16416 7.60437 1.30439 7.81073C1.30439 7.81073 4.11419 11.9091 7.56285 11.9091Z'
+                  stroke='#191919'
+                  stroke-linecap='round'
                 />
               </svg>
-            </button>
+            </span>
           );
       }
     };
 
     return (
-      <div>
+      <div
+        dir={dir}
+        className={cn(
+          'font-yekan text-light-gray-inactivestates',
+          error
+            ? ' active:text-light-error- focus-within:text-light-error-100'
+            : 'focus-within:text-light-secondary-100 active:text-dark-gray-text',
+        )}
+      >
+        <FormLabel className='text-sm  my-8 mx-16'>{label}</FormLabel>
         <div
           className={cn(
             inputVariants({ size, className }),
-            error &&
-              'border-light-error-100 active:border-light-error-100 focus dark:border-dark-error-100',
+            error
+              ? 'border-light-error-100 active:border-light-error- focus-within:border-light-error-100'
+              : 'focus-within:text-light-secondary-100 active:text-dark-gray-text',
           )}
         >
-          <input
-            id={formItemId}
-            type={showPassword ? 'text' : type}
-            className={cn(
-              ' text-sm  transition-colors  focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
-              className,
-              error && 'text-light-error-100 dark:text-dark-error-100',
-            )}
-            ref={ref}
-            {...props}
-          />
-          {changeIcon()}
+          <FormControl>
+            <input
+              id={formItemId}
+              type={showPassword ? 'text' : type}
+              className={cn(
+                ' text-base px-16 transition-colors  focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text',
+                className,
+              )}
+              ref={ref}
+              {...props}
+            />
+          </FormControl>
+          {changeAction()}
         </div>
-        {/* <span>{error ? errors[name] : 'this is not test'}</span> */}
+        <FormMessage className='text-sm mx-16' />
       </div>
     );
   },

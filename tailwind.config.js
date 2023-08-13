@@ -14,6 +14,13 @@ module.exports = {
 
 
     extend: {
+      fontSize: {
+        sm: ["12px", "14px"],
+        base: ['14px', '16px'],
+        lg: ['16px', '24px'],
+        xl: ['20px', '28px'],
+        xxl: ['24px', '32px'],
+      },
       borderRadius: {
         lg: `var(--radius)`,
         md: `calc(var(--radius) - 2px)`,
@@ -41,6 +48,15 @@ module.exports = {
         16: "1rem",
         8: ".5rem",
         24: "1.5rem"
+      },
+      margin: {
+
+        2: "0.125rem",
+        12: "0.75rem",
+        16: "1rem",
+        8: ".5rem",
+        24: "1.5rem"
+
       },
       colors: {
 
@@ -119,7 +135,6 @@ module.exports = {
 
       fontFamily: {
         yekan: 'Yekan',
-        // sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
