@@ -4,7 +4,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from "zod";
 import { Button } from '../src/components/buttons';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '../src/components/form';
+import { Form, FormControl, FormDescription, FormField, FormItem } from '../src/components/form';
 import { Input } from "../src/components/input";
 
 export default {
@@ -149,7 +149,6 @@ export const number = (args) => {
                     name="number"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>label</FormLabel>
                             <FormControl>
                                 <Input type="number"  {...args} {...field} />
                             </FormControl>
@@ -205,31 +204,41 @@ form.args = {
     size: "md",
     dir: "rtl",
     placeholder: "متن نوشته شده",
-    label: "برچسب"
+    label: "برچسب",
+    disabled: false
+
 }
 number.args = {
     size: "md",
     dir: "rtl",
     placeholder: "عدد نوشته شده",
-    label: "برچسب"
+    label: "برچسب",
+    disabled: false
+
 }
 text.args = {
     size: "md",
     dir: "rtl",
     placeholder: "متن نوشته شده",
-    label: "برچسب"
+    label: "برچسب",
+    disabled: false
+
 }
 password.args = {
     size: "md",
     dir: "rtl",
     placeholder: "پسورد",
-    label: "برچسب"
+    label: "برچسب",
+    disabled: false
+
 
 }
 phone.args = {
     size: "md",
     dir: "rtl",
     placeholder: "موبایل",
-    label: "برچسب"
+    label: "برچسب",
+    disabled: false
+
 
 }

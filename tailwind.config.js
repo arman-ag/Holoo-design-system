@@ -80,6 +80,7 @@ module.exports = {
           },
           gray: {
             text: "#F4F4F4",
+            line: "#E0E0E0",
             inactivestates: "#A0A4A8"
           },
         },

@@ -6,23 +6,23 @@ const config = {
   core: {
     builder: '@storybook/builder-vite', // 👈 The builder enabled here.
   },
-  async viteFinal(config) {
-    config.plugins = [
-      ...config.plugins,
-      svgrPlugin({
-        exclude: "",
-        include: "**/*.svg",
-        svgrOptions: {
-          icon: true,
-        },
-      })
-    ];
+  // async viteFinal(config) {
+  //   config.plugins = [
+  //     ...config.plugins,
+  //     svgrPlugin({
+  //       exclude: "",
+  //       include: "**/*.svg",
+  //       svgrOptions: {
+  //         icon: true,
+  //       },
+  //     })
+  //   ];
 
-    // return the customized config
-    return config;
-    // Merge custom configuration into the default config
+  //   // return the customized config
+  //   return config;
+  //   // Merge custom configuration into the default config
 
-  },
+  // },
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
