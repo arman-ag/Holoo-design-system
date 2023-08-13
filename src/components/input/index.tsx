@@ -31,7 +31,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       if (type === 'password') {
         return showPassword ? (
           <span
-            className='cursor-pointer text-dark-gray-text dark:text-light-secondary-100'
+            className='cursor-pointer text-dark-gray-text dark:text-light-gray-inactivestates'
             onClick={() => {
               setShowPassword(false);
             }}
@@ -63,7 +63,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </span>
         ) : (
           <span
-            className='cursor-pointer text-dark-gray-text dark:text-light-secondary-100'
+            className='cursor-pointer text-dark-gray-text dark:text-light-gray-inactivestates'
             onClick={() => {
               setShowPassword(true);
             }}
@@ -111,7 +111,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div
         dir={dir}
         className={cn(
-          'font-yekan text-light-gray-inactivestates disabled:active:text-white',
+          'font-yekan text-light-gray-inactivestates ',
           error
             ? ' active:text-light-error- focus-within:text-light-error-100'
             : 'focus-within:text-light-secondary-100 active:text-dark-gray-text',
@@ -139,7 +139,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               id={formItemId}
               type={showPassword ? 'text' : type}
               className={cn(
-                'bg-inherit	 text-base px-16   focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text dark:text-light-secondary-100',
+                'bg-inherit	 text-base px-16   focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text dark:text-light-gray-inactivestates',
                 className,
               )}
               ref={ref}
