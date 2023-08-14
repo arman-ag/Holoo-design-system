@@ -43,6 +43,7 @@ export const password = (args) => {
                     control={form.control}
                     name="password"
                     render={({ field }) => (
+
                         <FormItem>
                             <Input label={"پسورد"} type="password" placeholder="password"  {...args} {...field} />
 
