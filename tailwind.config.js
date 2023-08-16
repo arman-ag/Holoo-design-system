@@ -11,7 +11,22 @@ module.exports = {
     //   },
     // },
 
+    padding: {
+      2: "0.125rem",
+      12: "0.75rem",
+      16: "1rem",
+      8: ".5rem",
+      24: "1.5rem"
+    },
+    margin: {
 
+      2: "0.125rem",
+      12: "0.75rem",
+      8: ".5rem",
+      16: "1rem",
+      24: "1.5rem"
+
+    },
 
     extend: {
       fontSize: {
@@ -42,22 +57,7 @@ module.exports = {
 
 
       },
-      padding: {
-        2: "0.125rem",
-        12: "0.75rem",
-        16: "1rem",
-        8: ".5rem",
-        24: "1.5rem"
-      },
-      margin: {
 
-        2: "0.125rem",
-        12: "0.75rem",
-        8: ".5rem",
-        16: "1rem",
-        24: "1.5rem"
-
-      },
       colors: {
 
         light: {

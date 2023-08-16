@@ -1,6 +1,5 @@
 import React from "react";
 
-import { Label } from "../src/components/label";
 import { RadioGroup, RadioGroupItem } from "../src/components/radioGroup";
 export default {
     title: 'RadioGroup',
@@ -20,15 +19,15 @@ export const radioGroups = (args) => {
     return (<RadioGroup defaultValue="option-one">
 
         <div dir="rtl" className="flex items-center space-x-2">
-            <RadioGroupItem {...args} value="option-one" id="option-one" />
-            <Label className="mr-7" htmlFor="option-one">ایتم1</Label>
+
+            <RadioGroupItem label="1ایت" {...args} value="option-one" id="option-one" />
         </div>
         <div dir="rtl" className="flex items-center space-x-2">
-            <RadioGroupItem value="option-two" id="option-two" />
-            <Label htmlFor="option-two">ایتم 2</Label>
+            <RadioGroupItem label="2ایت" {...args} value="option-two" id="option-two" />
         </div>
     </RadioGroup>)
 }
 radioGroups.args = {
-    disabled: false
+    disabled: false,
+    size: "sm",
 }
