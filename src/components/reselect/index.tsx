@@ -1,9 +1,8 @@
 import { HelpCircle, Triangle } from 'lucide-react';
 import React from 'react';
-import Select from 'react-select';
+import Select, { ControlProps, components } from 'react-select';
 import { cn } from '../../lib/utils';
 import { FormLabel } from '../form';
-
 const ReSelect = ({ label, dir, options, searchable, disabled, ...props }) => (
   <div dir={dir}>
     <FormLabel
@@ -39,21 +38,21 @@ const ReSelect = ({ label, dir, options, searchable, disabled, ...props }) => (
       }}
       options={options}
       components={{
-        Input: ({ selectProps }) => {
+        Input: (props: ControlProps) => {
           return (
-            <div dir={dir} className='flex '>
+            <div dir={dir} className='flex items-center '>
               <HelpCircle className='h-5 w-5 mx-8' />
-              {selectProps.placeholder}
+              <components.Input {...props} />
             </div>
           );
         },
-        DropdownIndicator: (state) => {
+        DropdownIndicator: ({ isFocused }) => {
           return (
             <Triangle
               fill='currentcolor'
               className={cn(
                 ' h-2 w-2',
-                state.isFocused ? '!rotate-0' : ' rotate-180',
+                isFocused ? '!rotate-0' : ' rotate-180',
               )}
             />
           );
