@@ -11,12 +11,12 @@ export default {
         backgroundColor: { control: "color" }
     }
 };
-export const tabs = ({ title, ...props }) => {
+export const tabs = ({ title, disabled, ...props }) => {
     return (
         <div>
             <Tabs defaultValue="account" className="w-[800px]">
                 <TabsList>
-                    <TabsTrigger halfBorder={false} value="account">
+                    <TabsTrigger disabled={disabled} halfBorder={false} value="account">
                         <div className="flex items-center">
                             <GalleryHorizontal className="mx-8" size={"14px"} />
                             {
@@ -56,5 +56,6 @@ export const tabs = ({ title, ...props }) => {
     )
 }
 tabs.args = {
-    title: "عنوان"
+    title: "عنوان",
+    disabled: false
 }
