@@ -66,8 +66,8 @@ dropdown.args = {
     dir: "rtl",
     options: [
         { value: 'عنوان', label: 'عنوان' },
-        { value: 'عنوان', label: 'عنوان' },
-        { value: 'عنوان', label: 'عنوان' },
+        { value: '2عنوان', label: '2عنوان' },
+        { value: '3عنوان', label: '3عنوان' },
     ],
     searchable: true,
     placeholder: "عنوان یا متن جستو جو",
