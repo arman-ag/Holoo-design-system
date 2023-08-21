@@ -4,7 +4,7 @@ import React from 'react';
 import Select, { MultiValueGenericProps, components } from 'react-select';
 import { cn } from '../../lib/utils';
 import { FormLabel } from '../form';
-const ReSelect = ({ label, dir, options, searchable, disabled, ...props }) => {
+const DropDown = ({ label, dir, options, searchable, disabled, ...props }) => {
   const CustomMenuWithInput = ({ innerProps, ...props }) => {
     return <div className='bg-red-300 '>sa</div>;
   };
@@ -52,13 +52,14 @@ const ReSelect = ({ label, dir, options, searchable, disabled, ...props }) => {
                 'border-light-secondary-100   text-light-secondary-100 rounded-none !rounded-t-lg ',
             );
           },
+
           menu: () => {
             return cn(
-              'font-yekan border cursor-pointer rounded-b-8 bg-[#eef4f7] px-16 text-sm shadow-md',
+              'font-yekan border  rounded-b-8 bg-[#eef4f7] px-16 text-sm shadow-md ',
             );
           },
           option: () => {
-            return cn('p-12 my-8');
+            return cn('!cursor-pointer p-12 my-8');
           },
         }}
         options={options}
@@ -73,4 +74,4 @@ const ReSelect = ({ label, dir, options, searchable, disabled, ...props }) => {
   );
 };
 
-export { ReSelect };
+export { DropDown };

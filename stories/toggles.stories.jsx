@@ -13,11 +13,11 @@ export default {
 }
 export const toggles = (args) => {
     return (
+
         <Switch {...args} />
     )
 }
 toggles.args = {
     id: "toggles",
-    dir: "ltr",
     disabled: false
 }

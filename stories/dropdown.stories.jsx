@@ -1,13 +1,19 @@
+import { useForm } from "react-hook-form"
+import { Button } from "../src/components/buttons"
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "/src/components/select"
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormMessage
+} from "../src/components/form"
+import {
+    DropDown
+} from "../src/components/dropDown"
 export default {
     title: "dropdown",
-    component: Select,
+    component: DropDown,
     parameters: {
         layout: "centered"
     },
@@ -19,20 +25,43 @@ export default {
     }
 }
 export const dropdown = (args) => {
+    const form = useForm()
+
+    function onSubmit(data) {
+        alert(data)
+    }
     return (
-        <div >
-
-            <Select   >
-                <SelectTrigger  >
-                    <SelectValue placeholder="عنوان متن" />
-                </SelectTrigger>
-                <SelectContent >
-                    <SelectItem value="m@example.com">m@example.com</SelectItem>
-                    <SelectItem value="m@google.com">m@google.com</SelectItem>
-                    <SelectItem value="m@support.com">m@support.com</SelectItem>
-                </SelectContent>
-            </Select>
-
-        </div >
+        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <DropDown  {...args} />
+                            </FormControl>
+                            <FormDescription>
+                                You can manage email addresses in your
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <Button type="submit">Submit</Button>
+            </form>
+        </Form>
     )
+}
+dropdown.args = {
+    dir: "rtl",
+    options: [
+        { value: 'عنوان', label: 'عنوان' },
+        { value: '2عنوان', label: '2عنوان' },
+        { value: '3عنوان', label: '3عنوان' },
+    ],
+    searchable: true,
+    placeholder: "عنوان یا متن جستو جو",
+    label: "لیبل",
+    disabled: false
 }
