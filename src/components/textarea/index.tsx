@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { cn } from '../../lib/utils';
-import { FormLabel, FormMessage, useFormField } from '../form';
+import { FormControl, FormLabel, FormMessage, useFormField } from '../form';
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -16,27 +16,30 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         className={cn(
           error &&
             ' active:text-light-error- focus-within:text-light-error-100',
-          'font-yekan dark:text-dark-gray-secondarytext focus-within:text-light-gray-secondarytext ',
+          'focus-within:text-light-secondary-100  font-yekan dark:text-dark-gray-secondarytext  ',
         )}
         dir={dir}
       >
         <FormLabel
-          className={cn('text-sm my-14  mx-16  ', disabled && 'opacity-30 ')}
+          htmlFor={formItemId}
+          className={cn('text-sm my-14   mx-16  ', disabled && 'opacity-30 ')}
         >
           {label}
         </FormLabel>
-        <textarea
-          id={formItemId}
-          disabled={disabled}
-          className={cn(
-            className,
-            'flex  my-8 min-h-[60px] w-full rounded-16 text-base  border border-light-gray-inactivestates active:border-dark-gray-text bg-transparent px-16 py-8   placeholder:text-light-gray-textfield  placeholder:text-base focus-visible:outline-none focus-visible:bg-light-gray-disable disabled:cursor-not-allowed  disabled:opacity-50 disabled:border-opacity-50 dark:focus:bg-dark-secondary-2 dar ',
-            error &&
-              'border-light-error-100 active:border-light-error- focus-within:border-light-error-100',
-          )}
-          ref={ref}
-          {...props}
-        />
+        <FormControl>
+          <textarea
+            id={formItemId}
+            disabled={disabled}
+            className={cn(
+              'flex ring-offset-8  ring-light-gray-inactivestates  placeholder:text-light-gray-textfield text-dark-secondary-2 resize  outline-none min-h-[80px] w-full rounded-8  p-8  m-8 border-input  px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:ring-light-secondary-100	 ring-1 disabled:cursor-not-allowed disabled:opacity-50',
+              className,
+              error &&
+                ' ring-light-error-100 focus-visible:ring-light-error-100',
+            )}
+            ref={ref}
+            {...props}
+          />
+        </FormControl>
         <FormMessage className='text-sm mx-16' />
       </div>
     );

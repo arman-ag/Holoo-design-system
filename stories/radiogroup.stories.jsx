@@ -15,15 +15,17 @@ export default {
         backgroundColor: { control: 'color' },
     },
 };
-export const radioGroups = (args) => {
+export const radioGroups = ({ size, ...args }) => {
     return (<RadioGroup defaultValue="option-one">
 
-        <div dir="rtl" className="flex items-center space-x-2">
-
-            <RadioGroupItem label="1ایت" {...args} value="option-one" id="option-one" />
+        <div className="flex items-center ">
+            <label htmlFor="ption-one" className="mx-8 text-sm font-yekan">عنوان</label>
+            <RadioGroupItem size={size}  {...args} value="option-one" id="option-one" />
         </div>
-        <div dir="rtl" className="flex items-center space-x-2">
-            <RadioGroupItem label="2ایت" {...args} value="option-two" id="option-two" />
+        <div className="flex items-center ">
+            <label htmlFor="option-two" className="mx-8 text-sm font-yekan">عنوان</label>
+
+            <RadioGroupItem size={size} {...args} value="option-two" id="option-two" />
         </div>
     </RadioGroup>)
 }
