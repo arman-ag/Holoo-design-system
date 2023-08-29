@@ -151,7 +151,11 @@ export const number = (args) => {
                     render={({ field }) => (
                         <FormItem>
                             <FormControl>
-                                <Input type="number"  {...args} {...field} />
+                                <div style={{ width: "200px", height: "200px" }}>
+                                    <Input type="number"  {...args} {...
+
+                                        field} />
+                                </div>
                             </FormControl>
 
                         </FormItem>
@@ -202,7 +206,7 @@ export const form = (args) => {
 
 form.args = {
     type: "text",
-    size: "md",
+    inputSize: "md",
     dir: "rtl",
     placeholder: "متن نوشته شده",
     label: "برچسب",
@@ -210,7 +214,7 @@ form.args = {
 
 }
 number.args = {
-    size: "md",
+    inputSize: "md",
     dir: "rtl",
     placeholder: "عدد نوشته شده",
     label: "برچسب",
@@ -218,7 +222,7 @@ number.args = {
 
 }
 text.args = {
-    size: "md",
+    inputSize: "md",
     dir: "rtl",
     placeholder: "متن نوشته شده",
     label: "برچسب",
@@ -226,7 +230,7 @@ text.args = {
 
 }
 password.args = {
-    size: "md",
+    inputSize: "md",
     dir: "rtl",
     placeholder: "پسورد",
     label: "برچسب",
@@ -235,7 +239,7 @@ password.args = {
 
 }
 phone.args = {
-    size: "md",
+    inputSize: "md",
     dir: "rtl",
     placeholder: "موبایل",
     label: "برچسب",

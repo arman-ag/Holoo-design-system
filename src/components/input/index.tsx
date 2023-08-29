@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -13,20 +12,29 @@ const inputVariants = cva(
   ' flex items-center w-full rounded-8 border border-light-gray-inactivestates focus-within:border-light-secondary-100 my-8 ',
   {
     variants: {
-      size: { sm: 'h-32 py-8 px-12 ', md: 'h-40 py-12 px-16', lg: 'p-16 h-48' },
-      defaultVariants: {
-        size: 'md',
+      inputSize: {
+        sm: 'h-32 py-8 px-12 ',
+        md: 'h-40 py-12 px-16',
+        lg: 'p-16 h-48',
       },
+    },
+    defaultVariants: {
+      inputSize: 'md',
     },
   },
 );
 
-export interface InputProps
+interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {}
+    VariantProps<typeof inputVariants> {
+  label: string;
+}
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ label, disabled, className, size, dir, type, name, ...props }, ref) => {
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  (
+    { label, inputSize, disabled, className, dir, type, name, ...props },
+    ref,
+  ) => {
     const [showPassword, setShowPassword] = React.useState(false);
     const { error, formItemId } = useFormField();
 
@@ -65,20 +73,22 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div
         dir={dir}
         className={cn(
-          'font-yekan text-light-gray-inactivestates ',
+          'font-yekan text-light-gray-secondarytext ',
           error
             ? ' - focus-within:text-light-error-100'
             : 'focus-within:text-light-secondary-100 ',
           disabled && 'opacity-50',
         )}
       >
-        <FormLabel className={cn('text-sm  mx-16 ', disabled && 'opacity-50 ')}>
+        <FormLabel
+          className={cn('text-sm  mx-16  ', disabled && 'opacity-50 ')}
+        >
           {label}
         </FormLabel>
         <FormControl>
           <div
             className={cn(
-              inputVariants({ size, className }),
+              inputVariants({ inputSize, className }),
               disabled && 'opacity-50  focus-within:border-opacity-50',
               error
                 ? 'border-light-error-100 - focus-within:border-light-error-100'
@@ -105,5 +115,3 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   },
 );
 Input.displayName = 'Input';
-
-export { Input };

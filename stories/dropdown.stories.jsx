@@ -1,16 +1,12 @@
 import { useForm } from "react-hook-form"
 import { Button } from "../src/components/buttons"
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormMessage
-} from "../src/components/form"
-import {
     DropDown
 } from "../src/components/dropDown"
+import {
+    Form,
+    FormField
+} from "../src/components/form"
 export default {
     title: "dropdown",
     component: DropDown,
@@ -28,25 +24,30 @@ export const dropdown = (args) => {
     const form = useForm()
 
     function onSubmit(data) {
-        alert(data)
+        console.log("data", data)
     }
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
                 <FormField
                     control={form.control}
-                    name="email"
+                    name="select"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormControl>
-                                <DropDown  {...args} />
-                            </FormControl>
-                            <FormDescription>
-                                You can manage email addresses in your
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
+                        <div style={{ width: "200px" }} >
+                            <DropDown
+                                id={56}
+
+                                name={field.name}
+                                value={field.value}
+                                onChange={field.onChange}
+                                ref={field.ref}
+                                onBlur={field.onBlur}
+                                {...args} />
+
+                        </div>
+
+                    )
+                    }
                 />
                 <Button type="submit">Submit</Button>
             </form>
@@ -57,11 +58,21 @@ dropdown.args = {
     dir: "rtl",
     options: [
         { value: 'عنوان', label: 'عنوان' },
-        { value: '2عنوان', label: '2عنوان' },
+        {
+            value: '0000000000000000000000000000002عنوان', label: '0000000000000000000000000000002عنوان'
+        },
         { value: '3عنوان', label: '3عنوان' },
+        { value: '4عنوان', label: '4عنوان' },
+        { value: '5عنوان', label: '5عنوان' },
+        { value: '6عنوان', label: '6عنوان' },
+        { value: '7عنوان', label: '7عنوان' },
+        { value: '8عنوان', label: '8عنوان' },
+        { value: '9عنوان', label: '9عنوان' },
     ],
     searchable: true,
     placeholder: "عنوان یا متن جستو جو",
     label: "لیبل",
-    disabled: false
+    disabled: false,
+    multiItem: true,
+    noOptionsMessage: "آیتم مورد نظر یافت نشد"
 }

@@ -1,72 +1,95 @@
 // @ts-nocheck
-import { Triangle } from 'lucide-react';
-import React from 'react';
-import Select, { MultiValueGenericProps, components } from 'react-select';
-import { cn } from '../../lib/utils';
-import { FormLabel } from '../form';
-const DropDown = ({ label, dir, options, searchable, disabled, ...props }) => {
-  const CustomMenuWithInput = ({ innerProps, ...props }) => {
-    return <div className='bg-red-300 '>sa</div>;
-  };
-  const MultiValueContainer = (props: MultiValueGenericProps<ColourOption>) => {
-    return (
-      <span className='border mx-2 rounded-16 px-8 py-[6px] border-light-secondary-100 active:text-light-secondary-130 active:bg-light-secondary-20 '>
-        <components.MultiValueContainer {...props} />
-      </span>
-    );
-  };
 
-  const DropdownIndicator = (props) => {
-    return (
-      <components.DropdownIndicator {...props}>
-        <Triangle
-          fill='currentcolor'
-          className={cn(' h-2 w-2', options ? '!rotate-0' : ' rotate-180')}
-        />
-      </components.DropdownIndicator>
-    );
-  };
+import React from 'react';
+import Select from 'react-select';
+import { cn } from '../../lib/utils';
+import {
+  Control,
+  DropdownIndicator,
+  MultiValueContainer,
+  Option,
+  ValueContainer,
+} from './dropDownComponents';
+interface dropDownProps {
+  label: string;
+  multiItem?: boolean;
+  dir?: string;
+  searchable?: boolean;
+  disabled?: boolean;
+  noOptionsMessage?: string;
+  id?: number;
+  options: { value: string; label: string }[];
+}
+
+const DropDown = ({
+  multiItem,
+  dir,
+  options,
+  searchable,
+  disabled,
+  noOptionsMessage,
+  id,
+  ...props
+}: dropDownProps) => {
   return (
-    <div dir={dir}>
-      <FormLabel
-        className={cn(
-          'mx-8',
-          disabled ? 'opacity-70 cursor-not-allowed' : 'text-dark-gray-text',
-        )}
-      >
-        {label}
-      </FormLabel>
+    <div className='h-[56px]' dir={dir}>
       <Select
-        isMulti
+        inputId={id}
+        closeMenuOnSelect={!multiItem}
+        hideSelectedOptions={false}
+        options={options}
+        noOptionsMessage={() => noOptionsMessage}
+        isMulti={multiItem}
         isDisabled={disabled}
         isSearchable={searchable}
         isRtl={dir === 'rtl'}
         unstyled
         classNames={{
           control: (state) => {
-            state;
             return cn(
-              disabled && 'opacity-70 cursor-not-allowed',
-              ' border rounded-lg text-sm my-8 border-light-gray-inactivestates text-light-gray-secondarytext font-yekan px-16',
+              disabled && 'opacity-70  cursor-not-allowed ',
+              'border rounded-lg text-sm my-8 border-light-gray-inactivestates text-light-gray-secondarytext font-yekan px-[12px]',
               state.menuIsOpen &&
                 'border-light-secondary-100   text-light-secondary-100 rounded-none !rounded-t-lg ',
             );
           },
-
+          valueContainer: () => {
+            return cn(' min-w-[100px]');
+          },
+          multiValue: () => {
+            return cn(
+              'border max-w-[100px] ml-[5px] rounded-16 px-8 py-[6px] border-light-secondary-100 active:text-light-secondary-130 active:bg-light-secondary-20',
+            );
+          },
+          clearIndicator: () => {
+            return cn('mx-[5px]');
+          },
           menu: () => {
             return cn(
-              'font-yekan border  rounded-b-8 bg-[#eef4f7] px-16 text-sm shadow-md ',
+              'font-yekan border rounded-b-8 bg-[#eef4f7]  text-sm shadow-md ',
             );
+          },
+          placeholder: (state) => {
+            return cn(state.selectProps.menuIsOpen && 'hidden');
           },
           option: () => {
             return cn('!cursor-pointer p-12 my-8');
           },
+          noOptionsMessage: () => {
+            return cn('font-yekan p-8');
+          },
+          // menuList:()=>{
+          //   return
+          // }
         }}
-        options={options}
         components={{
-          // Control: CustomMenuWithInput,
+          ValueContainer,
           MultiValueContainer,
           DropdownIndicator,
+          Option,
+          MultiValueRemove: () => null,
+          ClearIndicator: () => null,
+          Control,
         }}
         {...props}
       />

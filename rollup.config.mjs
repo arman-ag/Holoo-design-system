@@ -31,8 +31,8 @@ export default [
     ],
     plugins: [
       esbuild({  // All options are optional
-        include: ["./src/**/*"],// default, inferred from `loaders` option
-        exclude: ["node_modules", "stories"], // default
+        include: ["./src/**/*", "custom.d.ts"],// default, inferred from `loaders` option
+        exclude: ["node_modules", "stories", "dist", "assets"], // default
         sourceMap: true, // default
         minify: true,
         target: 'esnext',
