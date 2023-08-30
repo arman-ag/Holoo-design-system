@@ -2,9 +2,15 @@
 
 import { Search, Triangle } from 'lucide-react';
 import React, { useState } from 'react';
-import { MultiValueGenericProps, components } from 'react-select';
+import { components } from 'react-select';
 import { cn } from '../../lib/utils';
 import { FormLabel } from '../form';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../tooltip';
 const ValueContainer = ({ children, ...innerProps }) => {
   const filterItems = () => {
     return children[0]?.length >= 2
@@ -79,17 +85,41 @@ const Option = ({
       getStyles={getStyles}
       innerProps={props}
     >
-      {rest.isMulti && (
-        <input type='checkbox' className='mx-8' checked={isSelected} />
-      )}
-      {children}
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className='  overflow-hidden text-ellipsis whitespace-nowrap'>
+              {rest.isMulti && (
+                <input type='checkbox' className='mx-8' checked={isSelected} />
+              )}
+              {children}
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{children}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </components.Option>
   );
 };
 
-const MultiValueContainer = (props: MultiValueGenericProps<ColourOption>) => {
+const MultiValueContainer = ({ children, ...props }) => {
   return props.selectProps.menuIsOpen ? null : (
-    <components.MultiValueContainer {...props} />
+    <components.MultiValueContainer {...props}>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className='border max-w-[100px] ml-[5px] rounded-16 px-8 py-[6px] border-light-secondary-100 active:text-light-secondary-130 active:bg-light-secondary-20'>
+              {children}
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{children}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </components.MultiValueContainer>
   );
 };
 
@@ -124,10 +154,29 @@ const Control = ({ children, ...props }) => {
     </components.Control>
   );
 };
+const SingleValue = ({ children, ...innerProps }) => {
+  return (
+    <components.SingleValue {...innerProps}>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className='max-w-[150px] text-ellipsis whitespace-nowrap overflow-hidden '>
+              {children}
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{children}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </components.SingleValue>
+  );
+};
 export {
   Control,
   DropdownIndicator,
   MultiValueContainer,
   Option,
+  SingleValue,
   ValueContainer,
 };

@@ -8,6 +8,7 @@ import {
   DropdownIndicator,
   MultiValueContainer,
   Option,
+  SingleValue,
   ValueContainer,
 } from './dropDownComponents';
 interface dropDownProps {
@@ -56,11 +57,11 @@ const DropDown = ({
           valueContainer: () => {
             return cn(' min-w-[100px]');
           },
-          multiValue: () => {
-            return cn(
-              'border max-w-[100px] ml-[5px] rounded-16 px-8 py-[6px] border-light-secondary-100 active:text-light-secondary-130 active:bg-light-secondary-20',
-            );
-          },
+          // multiValue: () => {
+          //   return cn(
+          //     'border max-w-[100px] ml-[5px] rounded-16 px-8 py-[6px] border-light-secondary-100 active:text-light-secondary-130 active:bg-light-secondary-20',
+          //   );
+          // },
           clearIndicator: () => {
             return cn('mx-[5px]');
           },
@@ -73,14 +74,13 @@ const DropDown = ({
             return cn(state.selectProps.menuIsOpen && 'hidden');
           },
           option: () => {
-            return cn('!cursor-pointer p-12 my-8');
+            return cn(
+              '!cursor-pointer p-12 my-8   overflow-x-hidden  text-ellipsis whitespace-nowrap 	',
+            );
           },
           noOptionsMessage: () => {
             return cn('font-yekan p-8');
           },
-          // menuList:()=>{
-          //   return
-          // }
         }}
         components={{
           ValueContainer,
@@ -90,6 +90,7 @@ const DropDown = ({
           MultiValueRemove: () => null,
           ClearIndicator: () => null,
           Control,
+          SingleValue,
         }}
         {...props}
       />
