@@ -3,13 +3,6 @@ module.exports = {
   darkMode: ["class", '[data-mode="dark"]'],
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
   theme: {
-    // container: {
-    //   center: true,
-    //   padding: "2rem",
-    //   screens: {
-    //     "2xl": "1400px",
-    //   },
-    // },
 
     padding: {
       2: "0.125rem",

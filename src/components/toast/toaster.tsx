@@ -10,7 +10,7 @@ import {
   ToastViewport,
 } from './index';
 
-export function Toaster() {
+export function Toaster({ dir = 'rtl' }) {
   const { toasts } = useToast();
 
   return (
@@ -18,18 +18,20 @@ export function Toaster() {
       {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
           <Toast key={id} {...props}>
-            <div className='grid gap-1'>
+            <div className='grid gap-1 '>
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
-                <ToastDescription>{description}</ToastDescription>
+                <ToastDescription className='w-11/12'>
+                  {description}
+                </ToastDescription>
               )}
             </div>
             {action}
-            <ToastClose />
+            <ToastClose dir={dir} />
           </Toast>
         );
       })}
-      <ToastViewport />
+      <ToastViewport dir={dir} />
     </ToastProvider>
   );
 }

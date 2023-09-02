@@ -1,11 +1,16 @@
+import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { z } from "zod"
 import { Button } from "../src/components/buttons"
 import {
     DropDown
 } from "../src/components/dropDown"
 import {
     Form,
-    FormField
+    FormControl,
+    FormField,
+    FormItem,
+    FormMessage
 } from "../src/components/form"
 export default {
     title: "dropdown",
@@ -20,37 +25,47 @@ export default {
         }
     }
 }
+const FormSchema = z.object({
+    awesomeSelect: z.array(z.object(
+        { value: z.string(), label: z.string() }
+    ))
+})
+
 export const dropdown = (args) => {
-    const form = useForm()
+    const form = useForm({ resolver: zodResolver(FormSchema), })
 
     function onSubmit(data) {
-        console.log("data", data)
+        alert(JSON.stringify(data))
     }
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
                 <FormField
                     control={form.control}
-                    name="select"
-                    render={({ field }) => (
-                        <div style={{ width: "200px" }} >
-                            <DropDown
-                                id={56}
-                                name={field.name}
-                                value={field.value}
-                                onChange={field.onChange}
-                                ref={field.ref}
-                                onBlur={field.onBlur}
-                                {...args} />
-
-                        </div>
-
-                    )
-                    }
+                    name="awesomeSelect"
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormControl>
+                                    <DropDown
+                                        id={56}
+                                        name={field.name}
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        ref={field.ref}
+                                        onBlur={field.onBlur}
+                                        {...args} />
+                                </FormControl>
+                                <FormMessage className="mt-2" />
+                            </FormItem>
+                        )
+                    }}
                 />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+                <div div style={{ marginTop: "25px" }}>
+                    <Button size={"sm"} type="submit">Submit</Button>
+                </div >
+            </form >
+        </Form >
     )
 }
 dropdown.args = {

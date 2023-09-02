@@ -3,6 +3,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { cn } from '../../lib/utils';
+import { useFormField } from '../form';
 import {
   Control,
   DropdownIndicator,
@@ -32,6 +33,7 @@ const DropDown = ({
   id,
   ...props
 }: dropDownProps) => {
+  const { error } = useFormField();
   return (
     <div className='h-[56px]' dir={dir}>
       <Select
@@ -48,6 +50,7 @@ const DropDown = ({
         classNames={{
           control: (state) => {
             return cn(
+              error && '!text-light-error-100 !border-light-error-100',
               disabled && 'opacity-70  cursor-not-allowed ',
               'border rounded-lg text-sm my-8 border-light-gray-inactivestates text-light-gray-secondarytext font-yekan px-[12px]',
               state.menuIsOpen &&
@@ -57,11 +60,7 @@ const DropDown = ({
           valueContainer: () => {
             return cn(' min-w-[100px]');
           },
-          // multiValue: () => {
-          //   return cn(
-          //     'border max-w-[100px] ml-[5px] rounded-16 px-8 py-[6px] border-light-secondary-100 active:text-light-secondary-130 active:bg-light-secondary-20',
-          //   );
-          // },
+
           clearIndicator: () => {
             return cn('mx-[5px]');
           },

@@ -136,18 +136,13 @@ const DropdownIndicator = (props) => {
     </components.DropdownIndicator>
   );
 };
-const Control = ({ children, ...props }) => {
+const Control = ({ error, children, ...props }) => {
   return (
     <components.Control {...props}>
       {children}
       <FormLabel
         htmlFor={props?.selectProps.inputId}
-        className={cn(
-          'absolute bottom-[45px] text-base ',
-          props.selectProps.menuIsOpen
-            ? 'text-light-secondary-100'
-            : 'text-light-gray-secondarytext',
-        )}
+        className={cn('absolute bottom-[45px] text-base  text-inherit')}
       >
         {props.selectProps.label}
       </FormLabel>
