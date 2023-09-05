@@ -1,4 +1,5 @@
 'use client';
+
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Circle } from 'lucide-react';
@@ -22,6 +23,7 @@ interface RadioGroupProps extends VariantProps<typeof radioButtonVariants> {
   disabled: boolean;
   children: React.ReactElement;
   id: string;
+  value: string;
   className: string;
 }
 type combineType = React.ElementRef<typeof RadioGroupPrimitive.Item> &
@@ -42,9 +44,13 @@ const RadioGroup = React.forwardRef<
 RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 
 const RadioGroupItem = React.forwardRef<combineType, RadioGroupProps>(
-  ({ className, children, label, size, disabled, id, ...props }, ref) => {
+  (
+    { className, children, label, size, value, disabled, id, ...props },
+    ref,
+  ) => {
     return (
       <RadioGroupPrimitive.Item
+        value={value}
         id={id}
         disabled={disabled}
         ref={ref}
