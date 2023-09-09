@@ -1,6 +1,6 @@
 {
-  "name": "@HAIP/designSystem ",
-  "version": "1.1.8",
+  "name": "@haip/design-system",
+  "version": "0.1.2.1",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
