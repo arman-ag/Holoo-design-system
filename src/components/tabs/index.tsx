@@ -5,6 +5,10 @@ import * as React from 'react';
 
 import { cn } from '../../lib/utils';
 
+interface TabsTriggerProps
+  extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger> {
+  halfBorder: boolean;
+}
 const Tabs = TabsPrimitive.Root;
 
 const TabsList = React.forwardRef<
@@ -24,7 +28,7 @@ TabsList.displayName = TabsPrimitive.List.displayName;
 
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
+  TabsTriggerProps
 >(({ className, halfBorder, ...props }, ref) => (
   <TabsPrimitive.Trigger
     ref={ref}

@@ -1,6 +1,6 @@
 'use client';
-
 import { ToastTitle } from '@radix-ui/react-toast';
+import * as React from 'react';
 import {
   Toast,
   ToastClose,

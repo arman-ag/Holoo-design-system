@@ -101,6 +101,7 @@ module.exports = {
             secondarytext: "#C3C5C6"
           }
         },
+        greendark: "var(--greendark)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

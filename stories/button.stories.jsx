@@ -60,7 +60,7 @@ export const ltrIcon = {
 
   render: () => (
     <>
-      <Button size={"sm"}>
+      <Button size={"sm"} >
         <div className='flex items-center '>
           <span style={{ marginRight: "10px" }}>
             < svg
