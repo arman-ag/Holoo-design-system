@@ -10,7 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        fill: 'bg-secondary1   hover:bg-secondary2  text-light-gray-text active:bg-light-secondary-120 focus:bg-light-secondary-130 dark:bg-dark-secondary-70 dark:hover:bg-dark-secondary-60  dark:active:bg-dark-secondary-60 dark:focus:bg-dark-secondary-50',
+        fill: 'secondary   hover:secondary2  text-light-gray-text active:bg-light-secondary-120 focus:bg-light-secondary-130 dark:bg-dark-secondary-70 dark:hover:bg-dark-secondary-60  dark:active:bg-dark-secondary-60 dark:focus:bg-dark-secondary-50',
         outline:
           'border-2 border-light-secondary-100 text-light-secondary-100 hover:text-light-secondary-120 hover:bg-light-secondary-10 active:bg-light-secondary-10 active:text-light-secondary-120 focus:text-light-secondary-130 focus:bg-light-secondary-20 dark:text-dark-secondary-70 dark:border-dark-secondary-70 dark:hover:bg-dark-secondary-160 dark:focus:bg-dark-secondary-160 dark:focus:bg-dark-secondary-130 ',
         text: ' text-light-secondary-100  hover:text-light-secondary-120 active:text-light-secondary-120 focus:text-light-secondary-130  dark:text-dark-secondary-70 dark:focus:text-dark-secondary-50',
