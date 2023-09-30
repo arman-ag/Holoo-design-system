@@ -54,18 +54,7 @@ module.exports = {
       colors: {
 
         light: {
-          secondary: {
-            10: "#E8F4FB",
-            20: "#D1E9F7",
-            40: "#A3D2F0",
-            50: "#8CC7EC",
-            80: "#48A5E1",
-            90: "#319ADD",
-            100: "#1A8FD9",
-            120: "#1572AE",
-            130: "#126498",
 
-          },
           error: {
             120: "#B9172B",
             100: "#E71D36",
@@ -85,11 +74,7 @@ module.exports = {
         dark: {
           secondary: {
             2: "#192025",
-            70: "#5FB1E4",
-            60: "#76BCE8",
-            50: "#8CC7EC",
-            160: "#0A3957",
-            130: "#126498",
+
           },
           error: {
             100: "#EC4A5E",
@@ -101,40 +86,24 @@ module.exports = {
             secondarytext: "#C3C5C6"
           }
         },
-        greendark: "var(--greendark)",
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+
+        primary180: "var(--primary180)",
+        primary170: "var(--primary170)",
+        primary160: "var(--primary160)",
+        primary150: "var(--primary150)",
+        primary140: "var(--primary140)",
+        primary130: "var(--primary130)",
+        primary110: "var(--primary110)",
+        primary100: "var(--primary100)",
+        primary90: "var(--primary90)",
+        primary80: "var(--primary80)",
+        primary70: "var(--primary70)",
+        primary60: "var(--primary60)",
+        primary50: "var(--primary50)",
+        primary40: "var(--primary40)",
+        primary30: "var(--primary30)",
+        primary20: "var(--primary20)",
+        primary10: "var(--primary10)",
       },
 
       fontFamily: {

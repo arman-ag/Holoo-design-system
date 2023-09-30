@@ -9,7 +9,7 @@ import { cn } from '../../lib/utils';
 import { FormControl, FormLabel, FormMessage, useFormField } from '../form';
 
 const inputVariants = cva(
-  ' flex items-center w-full rounded-8 border border-light-gray-inactivestates focus-within:border-light-secondary-100 my-8 ',
+  ' flex items-center w-full rounded-8 border border-light-gray-inactivestates focus-within:border-primary100 my-8 ',
   {
     variants: {
       inputSize: {
@@ -76,7 +76,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           'font-yekan text-light-gray-secondarytext ',
           error
             ? ' - focus-within:text-light-error-100'
-            : 'focus-within:text-light-secondary-100 ',
+            : 'focus-within:text-primary100 ',
           disabled && 'opacity-50',
         )}
       >
@@ -92,7 +92,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               disabled && 'opacity-50  focus-within:border-opacity-50',
               error
                 ? 'border-light-error-100 - focus-within:border-light-error-100'
-                : 'focus-within:text-light-secondary-100 ',
+                : 'focus-within:text-primary100 ',
             )}
           >
             <input

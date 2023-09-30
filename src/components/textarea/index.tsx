@@ -16,7 +16,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         className={cn(
           error &&
             ' active:text-light-error- focus-within:text-light-error-100',
-          'focus-within:text-light-secondary-100  font-yekan dark:text-dark-gray-secondarytext  ',
+          'focus-within:text-primary100  font-yekan dark:text-dark-gray-secondarytext  ',
         )}
         dir={dir}
       >
@@ -31,7 +31,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             id={formItemId}
             disabled={disabled}
             className={cn(
-              'flex ring-offset-8  ring-light-gray-inactivestates  placeholder:text-light-gray-textfield text-dark-secondary-2 resize  outline-none min-h-[80px] w-full rounded-8  p-8  m-8 border-input  px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:ring-light-secondary-100	 ring-1 disabled:cursor-not-allowed disabled:opacity-50',
+              'flex ring-offset-8  ring-light-gray-inactivestates  placeholder:text-light-gray-textfield text-dark-secondary-2 resize  outline-none min-h-[80px] w-full rounded-8  p-8  m-8 border-input  px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:ring-primary100	 ring-1 disabled:cursor-not-allowed disabled:opacity-50',
               className,
               error &&
                 ' ring-light-error-100 focus-visible:ring-light-error-100',

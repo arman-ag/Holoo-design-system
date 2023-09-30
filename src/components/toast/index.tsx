@@ -9,6 +9,7 @@ import {
   ToastViewport,
 } from './toastComponent';
 import { useToast } from './use-toast';
+('rollup-plugin-peer-deps-external');
 
 export function Toaster({ dir = 'rtl' }) {
   const { toasts } = useToast();

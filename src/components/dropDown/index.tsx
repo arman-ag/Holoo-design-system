@@ -54,7 +54,7 @@ const DropDown = ({
               disabled && 'opacity-70  cursor-not-allowed ',
               'border rounded-lg text-sm my-8 border-light-gray-inactivestates text-light-gray-secondarytext font-yekan px-[12px]',
               state.menuIsOpen &&
-                'border-light-secondary-100   text-light-secondary-100 rounded-none !rounded-t-lg ',
+                'border-primary100   text-primary100 rounded-none !rounded-t-lg ',
             );
           },
           valueContainer: () => {

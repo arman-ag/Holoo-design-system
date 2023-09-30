@@ -35,7 +35,7 @@ const ValueContainer = ({ children, ...innerProps }) => {
           )}
         {filterItems()}
         {children[0]?.length > 1 && !innerProps.selectProps.menuIsOpen && (
-          <div className='border flex items-center justify-center min-w-[28px] min-h-[28px] border-light-secondary-100   rounded-full '>
+          <div className='border flex items-center justify-center min-w-[28px] min-h-[28px] border-primary100   rounded-full '>
             {children[0]?.length - 1}+
           </div>
         )}
@@ -110,7 +110,7 @@ const MultiValueContainer = ({ children, ...props }) => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className='border max-w-[100px] ml-[5px] rounded-16 px-8 py-[6px] border-light-secondary-100 active:text-light-secondary-130 active:bg-light-secondary-20'>
+            <div className='border max-w-[100px] ml-[5px] rounded-16 px-8 py-[6px] border-primary100 active:text-primary130 active:bg-primary20'>
               {children}
             </div>
           </TooltipTrigger>

@@ -8,7 +8,7 @@ import * as React from 'react';
 import { cn } from '../../lib/utils';
 
 const radioButtonVariants = cva(
-  'mx-2  aspect-square  rounded-full border dark:border-light-secondary-80 dark:text-light-secondary-80 dark:hover:border-light-secondary-40 dark:hover:text-light-secondary-40 border-light-secondary-100 hover:border-light-secondary-120  hover:text-light-secondary-120 text-light-secondary-100 ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+  'mx-2  aspect-square  rounded-full border dark:border-primary80 dark:text-primary80 dark:hover:border-primary40 dark:hover:text-primary40 border-primary100 hover:border-primary120  hover:text-primary120 text-primary100 ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       size: { sm: 'h-4 w-4', md: 'h-6 w-6' },

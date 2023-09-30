@@ -10,10 +10,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        fill: 'bg-greendark hover:bg-light-secondary-120    text-light-gray-text active:bg-light-secondary-120 focus:bg-light-secondary-130 dark:bg-dark-secondary-70 dark:hover:bg-dark-secondary-60  dark:active:bg-dark-secondary-60 dark:focus:bg-dark-secondary-50',
+        fill: ' bg-primary100 hover:bg-primary120 text-light-gray-text active:bg-primary120 focus:bg-primary130 dark:bg-primary70 dark:hover:bg-primary60  dark:active:bg-primary60 dark:focus:bg-primary50',
         outline:
-          'border-2 border-light-secondary-100 text-light-secondary-100 hover:text-light-secondary-120 hover:bg-light-secondary-10 active:bg-light-secondary-10 active:text-light-secondary-120 focus:text-light-secondary-130 focus:bg-light-secondary-20 dark:text-dark-secondary-70 dark:border-dark-secondary-70 dark:hover:bg-dark-secondary-160 dark:focus:bg-dark-secondary-160 dark:focus:bg-dark-secondary-130 ',
-        text: ' text-light-secondary-100  hover:text-light-secondary-120 active:text-light-secondary-120 focus:text-light-secondary-130  dark:text-dark-secondary-70 dark:focus:text-dark-secondary-50',
+          'border-2 border-primary100 text-primary100 hover:text-primary120 hover:bg-primary10 active:bg-primary10 active:text-primary120 focus:text-primary130 focus:bg-primary20 dark:text-primary70 dark:border-primary70 dark:hover:bg-primary160 dark:focus:bg-primary160 dark:focus:bg-primary130 ',
+        text: ' text-primary100  hover:text-primary120 active:text-primary120 focus:text-primary130  dark:text-primary70 dark:focus:text-primary50',
       },
       size: {
         sm: 'h-28 w-104 py-12 px-2 text-sm font-normal',
