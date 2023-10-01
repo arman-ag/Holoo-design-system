@@ -9,7 +9,7 @@ import { cn } from '../../lib/utils';
 import { FormControl, FormLabel, FormMessage, useFormField } from '../form';
 
 const inputVariants = cva(
-  ' flex items-center w-full rounded-8 border border-light-gray-inactivestates focus-within:border-primary100 my-8 ',
+  ' flex items-center justify-between w-full rounded-8 border border-light-gray-inactivestates focus-within:border-primary100 my-8 ',
   {
     variants: {
       inputSize: {
