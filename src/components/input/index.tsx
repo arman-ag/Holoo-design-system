@@ -9,7 +9,7 @@ import { cn } from '../../lib/utils';
 import { FormControl, FormLabel, FormMessage, useFormField } from '../form';
 
 const inputVariants = cva(
-  ' flex items-center justify-between w-full rounded-8 border border-light-gray-inactivestates focus-within:border-primary100 my-8 ',
+  ' flex items-center justify-between w-full rounded-8 border border-light-gray-inactivestates focus-within:border-primary100 mt-8 ',
   {
     variants: {
       inputSize: {
@@ -100,7 +100,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               id={formItemId}
               type={showPassword ? 'text' : type}
               className={cn(
-                'bg-inherit 	text-base focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text dark:text-light-gray-inactivestates',
+                'bg-inherit !w-full !h-full bg-red-300	text-base focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text dark:text-light-gray-inactivestates',
                 className,
               )}
               ref={ref}
