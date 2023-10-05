@@ -13,7 +13,7 @@ const buttonVariants = cva(
         fill: ' bg-primary100 hover:bg-primary120 text-light-gray-text active:bg-primary120 focus:bg-primary130 dark:bg-primary70 dark:hover:bg-primary60  dark:active:bg-primary60 dark:focus:bg-primary50',
         outline:
           'border-2 border-primary100 text-primary100 hover:text-primary120 hover:bg-primary10 active:bg-primary10 active:text-primary120 focus:text-primary130 focus:bg-primary20 dark:text-primary70 dark:border-primary70 dark:hover:bg-primary160 dark:focus:bg-primary160 dark:focus:bg-primary130 ',
-        text: ' text-primary100  hover:text-primary120 active:text-primary120 focus:text-primary130  dark:text-primary70 dark:focus:text-primary50',
+        text: '!px-0 !py-0 !w-fit text-primary100  hover:text-primary120 active:text-primary120 focus:text-primary130  dark:text-primary70 dark:focus:text-primary50',
       },
       size: {
         sm: 'h-28 w-104 py-12 px-2 text-sm font-normal',
