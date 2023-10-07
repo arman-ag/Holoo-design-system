@@ -92,7 +92,8 @@ const columns = [
     },
     {
         accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
+        header: ({ column }) => <Button variant={"text"}
+            onClick={() => column.toggleSorting(column.getIsSorted() === "desc")} className="text-right">Amount</Button>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("amount"))
 

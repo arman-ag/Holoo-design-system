@@ -30,8 +30,7 @@ module.exports = {
         xxl: ['24px', '32px'],
       },
       borderRadius: {
-        lg: `var(--radius)`,
-        md: `calc(var(--radius) - 2px)`,
+
         16: "1rem",
         8: ".5rem"
       },
