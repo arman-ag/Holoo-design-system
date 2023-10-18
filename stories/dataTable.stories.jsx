@@ -4,6 +4,7 @@ import * as React from "react";
 import { Button } from "../src/components/buttons";
 import { Checkbox } from "../src/components/checkbox";
 import { DataTable } from "../src/components/dataTable";
+
 export default {
     title: "data-table",
     component: DataTable,
@@ -42,6 +43,66 @@ const data = [
     },
     {
         id: "bhqecj4p",
+        amount: 721,
+        status: "failed",
+        email: "carmella@hotmail.com",
+    },
+    {
+        id: "m5gr94casi9",
+        amount: 316,
+        status: "success",
+        email: "ken99@yahoo.com",
+    },
+    {
+        id: "3u1rsaccsacv4",
+        amount: 242,
+        status: "success",
+        email: "Abe45@gmail.com",
+    },
+    {
+        id: "descav1wcsas0",
+        amount: 837,
+        status: "processing",
+        email: "Monserrat44@gmail.com",
+    },
+    {
+        id: "5kcasmacas53ae",
+        amount: 874,
+        status: "success",
+        email: "Silas22@gmail.com",
+    },
+    {
+        id: "bhqcaecsaccj4p",
+        amount: 721,
+        status: "failed",
+        email: "carmella@hotmail.com",
+    },
+    {
+        id: "m5gr8casci9",
+        amount: 316,
+        status: "success",
+        email: "ken99@yahoo.com",
+    },
+    {
+        id: "3u1reacsauv4",
+        amount: 242,
+        status: "success",
+        email: "Abe45@gmail.com",
+    },
+    {
+        id: "dervacasc1ws0",
+        amount: 837,
+        status: "processing",
+        email: "Monserrat44@gmail.com",
+    },
+    {
+        id: "5kmacsa53ae",
+        amount: 874,
+        status: "success",
+        email: "Silas22@gmail.com",
+    },
+    {
+        id: "bhqeacssacj4p",
         amount: 721,
         status: "failed",
         email: "carmella@hotmail.com",

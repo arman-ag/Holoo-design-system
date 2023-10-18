@@ -11,17 +11,18 @@ module.exports = {
       8: ".5rem",
       24: "1.5rem"
     },
-    margin: {
 
-      2: "0.125rem",
-      12: "0.75rem",
-      8: ".5rem",
-      16: "1rem",
-      24: "1.5rem"
-
-    },
 
     extend: {
+      margin: {
+
+        2: "0.125rem",
+        12: "0.75rem",
+        8: ".5rem",
+        16: "1rem",
+        24: "1.5rem"
+
+      },
       fontSize: {
         sm: ["12px", "14px"],
         base: ['14px', '16px'],
