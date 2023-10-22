@@ -1,14 +1,26 @@
 'use client';
 import { DirectionProvider } from '@radix-ui/react-direction';
 import {
+  RankingInfo,
+  compareItems,
+  rankItem,
+} from '@tanstack/match-sorter-utils';
+
+import {
+  Column,
+  ColumnDef,
+  ColumnFiltersState,
+  FilterFn,
+  SortingFn,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  sortingFns,
   useReactTable,
 } from '@tanstack/react-table';
-import { ChevronLeft, ChevronRight, Filter, Search } from 'lucide-react';
+import { ChevronLeft, ChevronRight, FilterIcon, Search } from 'lucide-react';
 import * as React from 'react';
 import { Button } from '../buttons';
 import {
@@ -27,10 +39,171 @@ import {
   TableHeader,
   TableRow,
 } from '../table';
+declare module '@tanstack/table-core' {
+  interface FilterFns {
+    fuzzy: FilterFn<unknown>;
+  }
+  interface FilterMeta {
+    itemRank: RankingInfo;
+  }
+}
 
 export function DataTable<TData, TValue>({ columns, data }) {
-  const [globalFilter, setGlobalFilter] = React.useState('');
+  // //FILTER
+  // // A debounced input react component
+  const rerender = React.useReducer(() => ({}), {})[1];
 
+  const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
+    // Rank the item
+    const itemRank = rankItem(row.getValue(columnId), value);
+
+    // Store the itemRank info
+    addMeta({
+      itemRank,
+    });
+
+    // Return if the item should be filtered in/out
+    return itemRank.passed;
+  };
+  const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
+    let dir = 0;
+
+    // Only sort by rank if the column has ranking information
+    if (rowA.columnFiltersMeta[columnId]) {
+      dir = compareItems(
+        rowA.columnFiltersMeta[columnId]?.itemRank!,
+        rowB.columnFiltersMeta[columnId]?.itemRank!,
+      );
+    }
+
+    // Provide an alphanumeric fallback for when the item ranks are equal
+    return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir;
+  };
+  interface DataTableProps<TData, TValue> {
+    columns: ColumnDef<TData, TValue>[];
+    data: TData[];
+    searchComponent: JSX.Element[] | JSX.Element;
+  }
+
+  function DebouncedInput({
+    value: initialValue,
+    onChange,
+    debounce = 500,
+    ...props
+  }: {
+    value: string | number;
+    onChange: (value: string | number) => void;
+    debounce?: number;
+  } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
+    const [value, setValue] = React.useState(initialValue);
+
+    React.useEffect(() => {
+      setValue(initialValue);
+    }, [initialValue]);
+
+    React.useEffect(() => {
+      const timeout = setTimeout(() => {
+        onChange(value);
+      }, debounce);
+
+      return () => clearTimeout(timeout);
+    }, [value]);
+
+    return (
+      <input
+        {...props}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    );
+  }
+
+  function Filter({
+    column,
+    table,
+  }: {
+    column: Column<any, unknown>;
+    table: any;
+  }) {
+    const firstValue = table
+      ?.getPreFilteredRowModel()
+      .flatRows[0]?.getValue(column.id);
+
+    const columnFilterValue = column?.getFilterValue();
+
+    const sortedUniqueValues = React.useMemo(
+      () =>
+        typeof firstValue === 'number'
+          ? []
+          : Array.from(column.getFacetedUniqueValues().keys()).sort(),
+      [column.getFacetedUniqueValues()],
+    );
+
+    return typeof firstValue === 'number' ? (
+      <div>
+        <div className='flex space-x-2'>
+          {/* <DebouncedInput
+            type='number'
+            min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
+            max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
+            value={(columnFilterValue as [number, number])?.[0] ?? ''}
+            onChange={(value) =>
+              column.setFilterValue((old: [number, number]) => [
+                value,
+                old?.[1],
+              ])
+            }
+            placeholder={`Min ${
+              column.getFacetedMinMaxValues()?.[0]
+                ? `(${column.getFacetedMinMaxValues()?.[0]})`
+                : ''
+            }`}
+            className='w-24 border shadow rounded'
+          /> */}
+          {/* <DebouncedInput
+            type='number'
+            min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
+            max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
+            value={(columnFilterValue as [number, number])?.[1] ?? ''}
+            onChange={(value) =>
+              column.setFilterValue((old: [number, number]) => [
+                old?.[0],
+                value,
+              ])
+            }
+            placeholder={`Max ${
+              column.getFacetedMinMaxValues()?.[1]
+                ? `(${column.getFacetedMinMaxValues()?.[1]})`
+                : ''
+            }`}
+            className='w-24 border shadow rounded'
+          /> */}
+        </div>
+        <div className='h-1' />
+      </div>
+    ) : (
+      <>
+        <datalist id={column.id + 'list'}>
+          {sortedUniqueValues.slice(0, 5000).map((value: any) => (
+            <option value={value} key={value} />
+          ))}
+        </datalist>
+        <DebouncedInput
+          type='text'
+          value={(columnFilterValue ?? '') as string}
+          onChange={(value) => column.setFilterValue(value)}
+          placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
+          className='w-36 border shadow rounded'
+          list={column.id + 'list'}
+        />
+        <div className='h-1' />
+      </>
+    );
+  }
+  const [globalFilter, setGlobalFilter] = React.useState('');
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    [],
+  );
   const [sorting, setSorting] = React.useState([]);
 
   const table = useReactTable({
@@ -42,167 +215,24 @@ export function DataTable<TData, TValue>({ columns, data }) {
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    globalFilterFn: fuzzyFilter,
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
     state: {
+      columnFilters,
       sorting,
       globalFilter,
     },
   });
-  // //FILTER
-  // // A debounced input react component
-  // const rerender = React.useReducer(() => ({}), {})[1];
-
-  // const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-  //   [],
-  // );
-
-  // const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
-  //   // Rank the item
-  //   const itemRank = rankItem(row.getValue(columnId), value);
-
-  //   // Store the itemRank info
-  //   addMeta({
-  //     itemRank,
-  //   });
-
-  //   // Return if the item should be filtered in/out
-  //   return itemRank.passed;
-  // };
-  // const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
-  //   let dir = 0;
-
-  //   // Only sort by rank if the column has ranking information
-  //   if (rowA.columnFiltersMeta[columnId]) {
-  //     dir = compareItems(
-  //       rowA.columnFiltersMeta[columnId]?.itemRank!,
-  //       rowB.columnFiltersMeta[columnId]?.itemRank!,
-  //     );
-  //   }
-
-  //   // Provide an alphanumeric fallback for when the item ranks are equal
-  //   return dir === 0 ? sortingFns.alphanumeric(rowA, rowB, columnId) : dir;
-  // };
-  // interface DataTableProps<TData, TValue> {
-  //   columns: ColumnDef<TData, TValue>[];
-  //   data: TData[];
-  //   // searchComponent: JSX.Element[] | JSX.Element;
-  // }
-
-  // function DebouncedInput({
-  //   value: initialValue,
-  //   onChange,
-  //   debounce = 500,
-  //   ...props
-  // }: {
-  //   value: string | number;
-  //   onChange: (value: string | number) => void;
-  //   debounce?: number;
-  // } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
-  //   const [value, setValue] = React.useState(initialValue);
-
-  //   React.useEffect(() => {
-  //     setValue(initialValue);
-  //   }, [initialValue]);
-
-  //   React.useEffect(() => {
-  //     const timeout = setTimeout(() => {
-  //       onChange(value);
-  //     }, debounce);
-
-  //     return () => clearTimeout(timeout);
-  //   }, [value]);
-
-  //   return (
-  //     <input
-  //       {...props}
-  //       value={value}
-  //       onChange={(e) => setValue(e.target.value)}
-  //     />
-  //   );
-  // }
-
-  // function Filter({
-  //   column,
-  //   table,
-  // }: {
-  //   column: Column<any, unknown>;
-  //   table: Table<any>;
-  // }) {
-  //   const firstValue = table
-  //     .getPreFilteredRowModel()
-  //     .flatRows[0]?.getValue(column.id);
-
-  //   const columnFilterValue = column.getFilterValue();
-
-  //   const sortedUniqueValues = React.useMemo(
-  //     () =>
-  //       typeof firstValue === 'number'
-  //         ? []
-  //         : Array.from(column.getFacetedUniqueValues().keys()).sort(),
-  //     [column.getFacetedUniqueValues()],
-  //   );
-
-  //   return typeof firstValue === 'number' ? (
-  //     <div>
-  //       <div className='flex space-x-2'>
-  //         a
-  //         <DebouncedInput
-  //           type='number'
-  //           min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-  //           max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-  //           value={(columnFilterValue as [number, number])?.[0] ?? ''}
-  //           onChange={(value) =>
-  //             column.setFilterValue((old: [number, number]) => [
-  //               value,
-  //               old?.[1],
-  //             ])
-  //           }
-  //           placeholder={`Min ${
-  //             column.getFacetedMinMaxValues()?.[0]
-  //               ? `(${column.getFacetedMinMaxValues()?.[0]})`
-  //               : ''
-  //           }`}
-  //           className='w-24 border shadow rounded'
-  //         />
-  //         <DebouncedInput
-  //           type='number'
-  //           min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-  //           max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-  //           value={(columnFilterValue as [number, number])?.[1] ?? ''}
-  //           onChange={(value) =>
-  //             column.setFilterValue((old: [number, number]) => [
-  //               old?.[0],
-  //               value,
-  //             ])
-  //           }
-  //           placeholder={`Max ${
-  //             column.getFacetedMinMaxValues()?.[1]
-  //               ? `(${column.getFacetedMinMaxValues()?.[1]})`
-  //               : ''
-  //           }`}
-  //           className='w-24 border shadow rounded'
-  //         />
-  //       </div>
-  //       <div className='h-1' />
-  //     </div>
-  //   ) : (
-  //     <>
-  //       <datalist id={column.id + 'list'}>
-  //         {sortedUniqueValues.slice(0, 5000).map((value: any) => (
-  //           <option value={value} key={value} />
-  //         ))}
-  //       </datalist>
-  //       <DebouncedInput
-  //         type='text'
-  //         value={(columnFilterValue ?? '') as string}
-  //         onChange={(value) => column.setFilterValue(value)}
-  //         placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
-  //         className='w-36 border shadow rounded'
-  //         list={column.id + 'list'}
-  //       />
-  //       <div className='h-1' />
-  //     </>
-  //   );
-  // }
+  React.useEffect(() => {
+    if (table.getState().columnFilters[0]?.id === 'fullName') {
+      if (table.getState().sorting[0]?.id !== 'fullName') {
+        table.setSorting([{ id: 'fullName', desc: false }]);
+      }
+    }
+  }, [table.getState().columnFilters[0]?.id]);
   return (
     <div>
       <div className='flex items-baseline'>
@@ -242,7 +272,7 @@ export function DataTable<TData, TValue>({ columns, data }) {
           <Dialog>
             <DialogTrigger>
               <button className='rounded-md w-[3.25rem] h-[2.06rem] ml-[.4rem] border-2 border-primary100 text-primary100 hover:text-primary120 hover:bg-primary10 active:bg-primary10 active:text-primary120  '>
-                <Filter
+                <FilterIcon
                   className='mx-auto'
                   width={'1.25rem'}
                   height={'1.25rem'}
@@ -260,15 +290,6 @@ export function DataTable<TData, TValue>({ columns, data }) {
                   style={{ height: '20px', justifyContent: 'space-around' }}
                   className='flex '
                 >
-                  {/* <DropDown
-                    id={56}
-                    name={field.name}
-                    value={field.value}
-                    onChange={field.onChange}
-                    ref={field.ref}
-                    onBlur={field.onBlur}
-                    {...args}
-                  /> */}
                   <Button className='mx-8' size={'sm'}>
                     مشاهده
                   </Button>
@@ -289,6 +310,7 @@ export function DataTable<TData, TValue>({ columns, data }) {
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
+                      <Filter column={header.column} table={table} />
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -354,7 +376,6 @@ export function DataTable<TData, TValue>({ columns, data }) {
           </span>
         </div>
       </div>
-      {/* pagination */}
     </div>
   );
 }

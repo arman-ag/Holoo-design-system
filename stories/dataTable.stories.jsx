@@ -133,7 +133,7 @@ const columns = [
         accessorKey: "status",
         header: "Status",
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("status")}</div>
+            <div >{row.getValue("status")}</div>
         ),
     },
     {
