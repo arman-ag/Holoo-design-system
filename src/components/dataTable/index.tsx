@@ -296,7 +296,7 @@ export function DataTable<TData, TValue>({ columns, data, dir = 'rtl' }) {
           </Dialog>
         </DirectionProvider> */}
       </div>
-      <div className='rounded-md border shadow-md'>
+      <div className='rounded-md border shadow-xl'>
         <Table className='min-w-[40rem]' dir={'rtl'}>
           <TableHeader className='bg-gray-100  '>
             {table.getHeaderGroups().map((headerGroup) => (
