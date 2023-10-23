@@ -2,7 +2,6 @@
 import { ArrowUpDown } from "lucide-react";
 import * as React from "react";
 import { Button } from "../src/components/buttons";
-import { Checkbox } from "../src/components/checkbox";
 import { DataTable } from "../src/components/dataTable";
 
 export default {
@@ -112,26 +111,17 @@ const data = [
 const columns = [
     {
         id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={table.getIsAllPageRowsSelected()}
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
+        header: "ردیف",
+        cell: ({ row }) => {
+            return <div>{++row.index}</div>
+        }
+        ,
         enableSorting: false,
         enableHiding: false,
     },
     {
         accessorKey: "status",
-        header: "Status",
+        header: "وضعیت",
         cell: ({ row }) => (
             <div >{row.getValue("status")}</div>
         ),
@@ -144,7 +134,7 @@ const columns = [
                     variant="text"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Email
+                    ایمیل
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -154,7 +144,7 @@ const columns = [
     {
         accessorKey: "amount",
         header: ({ column }) => <Button variant={"text"}
-            onClick={() => column.toggleSorting(column.getIsSorted() === "desc")} className="text-right">Amount</Button>,
+            onClick={() => column.toggleSorting(column.getIsSorted() === "desc")} className="text-right">مقدار</Button>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("amount"))
 
@@ -166,21 +156,21 @@ const columns = [
             return <div className="text-right font-medium">{formatted}</div>
         },
     },
-    {
-        id: "actions",
-        enableHiding: false,
-        cell: ({ row }) => {
-            const payment = row.original
+    // {
+    //     id: "actions",
+    //     enableHiding: false,
+    //     cell: ({ row }) => {
+    //         const payment = row.original
 
-            return (
-                <div style={{ backgroundColor: "blue" }}></div>
-            )
-        },
-    },
+    //         return (
+    //             <div style={{ backgroundColor: "blue" }}></div>
+    //         )
+    //     },
+    // },
 ]
 
 export const DataTableDemo = () => {
     return (
-        <DataTable columns={columns} data={data} />
+        <DataTable dir="rtl" columns={columns} data={data} />
     )
 }

@@ -4,18 +4,18 @@ module.exports = {
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
   theme: {
 
-    padding: {
-      2: "0.125rem",
-      12: "0.75rem",
-      16: "1rem",
-      8: ".5rem",
-      24: "1.5rem"
-    },
+
 
 
     extend: {
+      padding: {
+        2: "0.125rem",
+        12: "0.75rem",
+        16: "1rem",
+        8: ".5rem",
+        24: "1.5rem"
+      },
       margin: {
-
         2: "0.125rem",
         12: "0.75rem",
         8: ".5rem",

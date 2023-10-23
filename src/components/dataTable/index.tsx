@@ -1,5 +1,4 @@
 'use client';
-import { DirectionProvider } from '@radix-ui/react-direction';
 import {
   RankingInfo,
   compareItems,
@@ -7,7 +6,6 @@ import {
 } from '@tanstack/match-sorter-utils';
 
 import {
-  Column,
   ColumnDef,
   ColumnFiltersState,
   FilterFn,
@@ -20,17 +18,8 @@ import {
   sortingFns,
   useReactTable,
 } from '@tanstack/react-table';
-import { ChevronLeft, ChevronRight, FilterIcon, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import * as React from 'react';
-import { Button } from '../buttons';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '../dialog';
 import {
   Table,
   TableBody,
@@ -48,7 +37,7 @@ declare module '@tanstack/table-core' {
   }
 }
 
-export function DataTable<TData, TValue>({ columns, data }) {
+export function DataTable<TData, TValue>({ columns, data, dir = 'rtl' }) {
   // //FILTER
   // // A debounced input react component
   const rerender = React.useReducer(() => ({}), {})[1];
@@ -85,121 +74,121 @@ export function DataTable<TData, TValue>({ columns, data }) {
     searchComponent: JSX.Element[] | JSX.Element;
   }
 
-  function DebouncedInput({
-    value: initialValue,
-    onChange,
-    debounce = 500,
-    ...props
-  }: {
-    value: string | number;
-    onChange: (value: string | number) => void;
-    debounce?: number;
-  } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
-    const [value, setValue] = React.useState(initialValue);
+  // function DebouncedInput({
+  //   value: initialValue,
+  //   onChange,
+  //   debounce = 500,
+  //   ...props
+  // }: {
+  //   value: string | number;
+  //   onChange: (value: string | number) => void;
+  //   debounce?: number;
+  // } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
+  //   const [value, setValue] = React.useState(initialValue);
 
-    React.useEffect(() => {
-      setValue(initialValue);
-    }, [initialValue]);
+  //   React.useEffect(() => {
+  //     setValue(initialValue);
+  //   }, [initialValue]);
 
-    React.useEffect(() => {
-      const timeout = setTimeout(() => {
-        onChange(value);
-      }, debounce);
+  //   React.useEffect(() => {
+  //     const timeout = setTimeout(() => {
+  //       onChange(value);
+  //     }, debounce);
 
-      return () => clearTimeout(timeout);
-    }, [value]);
+  //     return () => clearTimeout(timeout);
+  //   }, [value]);
 
-    return (
-      <input
-        {...props}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-    );
-  }
+  //   return (
+  //     <input
+  //       {...props}
+  //       value={value}
+  //       onChange={(e) => setValue(e.target.value)}
+  //     />
+  //   );
+  // }
 
-  function Filter({
-    column,
-    table,
-  }: {
-    column: Column<any, unknown>;
-    table: any;
-  }) {
-    const firstValue = table
-      ?.getPreFilteredRowModel()
-      .flatRows[0]?.getValue(column.id);
+  // function Filter({
+  //   column,
+  //   table,
+  // }: {
+  //   column: Column<any, unknown>;
+  //   table: any;
+  // }) {
+  //   const firstValue = table
+  //     ?.getPreFilteredRowModel()
+  //     .flatRows[0]?.getValue(column.id);
 
-    const columnFilterValue = column?.getFilterValue();
+  //   const columnFilterValue = column?.getFilterValue();
 
-    const sortedUniqueValues = React.useMemo(
-      () =>
-        typeof firstValue === 'number'
-          ? []
-          : Array.from(column.getFacetedUniqueValues().keys()).sort(),
-      [column.getFacetedUniqueValues()],
-    );
+  //   const sortedUniqueValues = React.useMemo(
+  //     () =>
+  //       typeof firstValue === 'number'
+  //         ? []
+  //         : Array.from(column.getFacetedUniqueValues().keys()).sort(),
+  //     [column.getFacetedUniqueValues()],
+  //   );
 
-    return typeof firstValue === 'number' ? (
-      <div>
-        <div className='flex space-x-2'>
-          {/* <DebouncedInput
-            type='number'
-            min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-            max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-            value={(columnFilterValue as [number, number])?.[0] ?? ''}
-            onChange={(value) =>
-              column.setFilterValue((old: [number, number]) => [
-                value,
-                old?.[1],
-              ])
-            }
-            placeholder={`Min ${
-              column.getFacetedMinMaxValues()?.[0]
-                ? `(${column.getFacetedMinMaxValues()?.[0]})`
-                : ''
-            }`}
-            className='w-24 border shadow rounded'
-          /> */}
-          {/* <DebouncedInput
-            type='number'
-            min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
-            max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
-            value={(columnFilterValue as [number, number])?.[1] ?? ''}
-            onChange={(value) =>
-              column.setFilterValue((old: [number, number]) => [
-                old?.[0],
-                value,
-              ])
-            }
-            placeholder={`Max ${
-              column.getFacetedMinMaxValues()?.[1]
-                ? `(${column.getFacetedMinMaxValues()?.[1]})`
-                : ''
-            }`}
-            className='w-24 border shadow rounded'
-          /> */}
-        </div>
-        <div className='h-1' />
-      </div>
-    ) : (
-      <>
-        <datalist id={column.id + 'list'}>
-          {sortedUniqueValues.slice(0, 5000).map((value: any) => (
-            <option value={value} key={value} />
-          ))}
-        </datalist>
-        <DebouncedInput
-          type='text'
-          value={(columnFilterValue ?? '') as string}
-          onChange={(value) => column.setFilterValue(value)}
-          placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
-          className='w-36 border shadow rounded'
-          list={column.id + 'list'}
-        />
-        <div className='h-1' />
-      </>
-    );
-  }
+  //   return typeof firstValue === 'number' ? (
+  //     <div>
+  //       <div className='flex space-x-2'>
+  //         {/* <DebouncedInput
+  //           type='number'
+  //           min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
+  //           max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
+  //           value={(columnFilterValue as [number, number])?.[0] ?? ''}
+  //           onChange={(value) =>
+  //             column.setFilterValue((old: [number, number]) => [
+  //               value,
+  //               old?.[1],
+  //             ])
+  //           }
+  //           placeholder={`Min ${
+  //             column.getFacetedMinMaxValues()?.[0]
+  //               ? `(${column.getFacetedMinMaxValues()?.[0]})`
+  //               : ''
+  //           }`}
+  //           className='w-24 border shadow rounded'
+  //         /> */}
+  //         {/* <DebouncedInput
+  //           type='number'
+  //           min={Number(column.getFacetedMinMaxValues()?.[0] ?? '')}
+  //           max={Number(column.getFacetedMinMaxValues()?.[1] ?? '')}
+  //           value={(columnFilterValue as [number, number])?.[1] ?? ''}
+  //           onChange={(value) =>
+  //             column.setFilterValue((old: [number, number]) => [
+  //               old?.[0],
+  //               value,
+  //             ])
+  //           }
+  //           placeholder={`Max ${
+  //             column.getFacetedMinMaxValues()?.[1]
+  //               ? `(${column.getFacetedMinMaxValues()?.[1]})`
+  //               : ''
+  //           }`}
+  //           className='w-24 border shadow rounded'
+  //         /> */}
+  //       </div>
+  //       <div className='h-1' />
+  //     </div>
+  //   ) : (
+  //     <>
+  //       <datalist id={column.id + 'list'}>
+  //         {sortedUniqueValues.slice(0, 5000).map((value: any) => (
+  //           <option value={value} key={value} />
+  //         ))}
+  //       </datalist>
+  //       <DebouncedInput
+  //         type='text'
+  //         value={(columnFilterValue ?? '') as string}
+  //         onChange={(value) => column.setFilterValue(value)}
+  //         placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
+  //         className='w-36 border shadow rounded'
+  //         list={column.id + 'list'}
+  //       />
+  //       <div className='h-1' />
+  //     </>
+  //   );
+  // }
   const [globalFilter, setGlobalFilter] = React.useState('');
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -234,8 +223,8 @@ export function DataTable<TData, TValue>({ columns, data }) {
     }
   }, [table.getState().columnFilters[0]?.id]);
   return (
-    <div>
-      <div className='flex items-baseline'>
+    <div className='font-yekan w-full'>
+      <div className='flex items-baseline justify-between'>
         <div className='flex mb-6 items-center  justify-between w-[13.12rem] h-[2.06rem]  rounded-r-md bg-white'>
           <button
             type='submit'
@@ -249,26 +238,31 @@ export function DataTable<TData, TValue>({ columns, data }) {
             />
           </button>
           <input
-            dir='rtl'
+            dir={dir}
             placeholder='جست وجو...'
             value={globalFilter ?? ''}
             onChange={(e) => setGlobalFilter(String(e.target.value))}
             className='outline-none rounded-r-md px-8  !w-full h-full border border-gray-200 '
           />
         </div>
-        <select
-          value={table.getState().pagination.pageSize}
-          onChange={(e) => {
-            table.setPageSize(Number(e.target.value));
-          }}
-        >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-        <DirectionProvider dir='rtl'>
+        <div className='flex items-center'>
+          <span className='text-sm'>ورودی</span>
+          <select
+            className=' text-center rounded-8 w-[3.25rem] mx-1 h-[2rem] outline-none bg-white border border-gray-100'
+            value={table.getState().pagination.pageSize}
+            onChange={(e) => {
+              table.setPageSize(Number(e.target.value));
+            }}
+          >
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                {pageSize}
+              </option>
+            ))}
+          </select>
+          <span className='text-sm'>نمایش</span>
+        </div>
+        {/* <DirectionProvider dir='rtl'>
           <Dialog>
             <DialogTrigger>
               <button className='rounded-md w-[3.25rem] h-[2.06rem] ml-[.4rem] border-2 border-primary100 text-primary100 hover:text-primary120 hover:bg-primary10 active:bg-primary10 active:text-primary120  '>
@@ -300,17 +294,17 @@ export function DataTable<TData, TValue>({ columns, data }) {
               </DialogFooter>
             </DialogContent>
           </Dialog>
-        </DirectionProvider>
+        </DirectionProvider> */}
       </div>
       <div className='rounded-md border shadow-md'>
-        <Table>
-          <TableHeader className='bg-gray-50'>
+        <Table className='min-w-[40rem]' dir={'rtl'}>
+          <TableHeader className='bg-gray-100  '>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
-                      <Filter column={header.column} table={table} />
+                    <TableHead className=' text-center' key={header.id}>
+                      {/* <Filter column={header.column} table={table} /> */}
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -327,11 +321,12 @@ export function DataTable<TData, TValue>({ columns, data }) {
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
+                  className='hover:bg-gray-50  h-[3.5rem]'
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell className=' text-center' key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),
@@ -342,17 +337,14 @@ export function DataTable<TData, TValue>({ columns, data }) {
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className='h-24 text-center'
-                >
+                <TableCell colSpan={columns.length} className='h-24 '>
                   No results.
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
-        <div>
+        {/* <div>
           <button
             className='border rounded p-1'
             onClick={() => table.previousPage()}
@@ -368,13 +360,12 @@ export function DataTable<TData, TValue>({ columns, data }) {
             <ChevronRight />
           </button>
           <span className='flex items-center gap-1'>
-            <div>Page</div>
             <strong>
               {table.getState().pagination.pageIndex + 1} of{' '}
               {table.getPageCount()}
             </strong>
           </span>
-        </div>
+        </div> */}
       </div>
     </div>
   );
