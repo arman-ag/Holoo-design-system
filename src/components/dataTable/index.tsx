@@ -4,7 +4,6 @@ import {
   compareItems,
   rankItem,
 } from '@tanstack/match-sorter-utils';
-
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -73,7 +72,6 @@ export function DataTable<TData, TValue>({ columns, data, dir = 'rtl' }) {
     data: TData[];
     searchComponent: JSX.Element[] | JSX.Element;
   }
-
   // function DebouncedInput({
   //   value: initialValue,
   //   onChange,

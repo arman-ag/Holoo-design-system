@@ -19,8 +19,8 @@ export const radioGroups = ({ size, ...args }) => {
     return (<RadioGroup defaultValue="option-one">
 
         <div className="flex items-center ">
-            <label htmlFor="ption-one" className="mx-8 text-sm font-yekan">عنوان</label>
-            <RadioGroupItem size={size}  {...args} value="option-one" id="option-one" />
+            <label htmlFor="option-two" className="mx-8 text-sm font-yekan">عنوان</label>
+            <RadioGroupItem label="عنوان" size={size}  {...args} value="option-one" id="option-one" />
         </div>
         <div className="flex items-center ">
             <label htmlFor="option-two" className="mx-8 text-sm font-yekan">عنوان</label>
