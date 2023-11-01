@@ -90,7 +90,11 @@ const Option = ({
           <TooltipTrigger asChild>
             <div className='  overflow-hidden text-ellipsis whitespace-nowrap'>
               {rest.isMulti && (
-                <input type='checkbox' className='mx-8' checked={isSelected} />
+                <input
+                  type='checkbox'
+                  className='mx-[.5rem]'
+                  checked={isSelected}
+                />
               )}
               {children}
             </div>
@@ -110,7 +114,7 @@ const MultiValueContainer = ({ children, ...props }) => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className='border max-w-[100px] ml-[5px] rounded-16 px-8 py-[6px] border-primary100 active:text-primary130 active:bg-primary20'>
+            <div className='border max-w-[100px] ml-[5px] rounded-16 px-[.5rem] py-[6px] border-primary100 active:text-primary130 active:bg-primary20'>
               {children}
             </div>
           </TooltipTrigger>

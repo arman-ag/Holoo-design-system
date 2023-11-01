@@ -52,7 +52,7 @@ const DropDown = ({
             return cn(
               error && '!text-light-error-100 !border-light-error-100',
               disabled && 'opacity-70  cursor-not-allowed ',
-              'border rounded-lg text-sm my-8 border-light-gray-inactivestates text-light-gray-secondarytext font-yekan px-[12px]',
+              'border rounded-lg text-sm my-[.5rem] border-light-gray-inactivestates text-light-gray-secondarytext font-yekan px-[12px]',
               state.menuIsOpen &&
                 'border-primary100   text-primary100 rounded-none !rounded-t-lg ',
             );
@@ -74,11 +74,11 @@ const DropDown = ({
           },
           option: () => {
             return cn(
-              '!cursor-pointer p-12 my-8   overflow-x-hidden  text-ellipsis whitespace-nowrap 	',
+              '!cursor-pointer p-12 my-[.5rem]   overflow-x-hidden  text-ellipsis whitespace-nowrap 	',
             );
           },
           noOptionsMessage: () => {
-            return cn('font-yekan p-8');
+            return cn('font-yekan p-[.5rem');
           },
         }}
         components={{

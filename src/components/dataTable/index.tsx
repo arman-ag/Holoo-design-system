@@ -240,7 +240,7 @@ export function DataTable<TData, TValue>({ columns, data, dir = 'rtl' }) {
             placeholder='جست وجو...'
             value={globalFilter ?? ''}
             onChange={(e) => setGlobalFilter(String(e.target.value))}
-            className='outline-none rounded-r-md px-8  !w-full h-full border border-gray-200 '
+            className='outline-none rounded-r-md px-[.5rem]  !w-full h-full border border-gray-200 '
           />
         </div>
         <div className='flex items-center'>

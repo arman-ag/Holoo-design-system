@@ -1,6 +1,6 @@
 {
   "name": "@haip/design-system",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "./dist/index.d.ts",
@@ -118,6 +118,7 @@
     "lucide-react": "^0.263.1",
     "primereact": "^9.6.0",
     "react-hook-form": "^7.45.4",
+    "react-multi-date-picker": "^4.4.1",
     "react-select": "^5.7.4",
     "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-postcss": "^4.0.2",
