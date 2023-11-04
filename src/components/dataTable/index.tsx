@@ -222,27 +222,7 @@ export function DataTable<TData, TValue>({ columns, data, dir = 'rtl' }) {
   }, [table.getState().columnFilters[0]?.id]);
   return (
     <div className='font-yekan w-full'>
-      <div className='flex items-baseline justify-between'>
-        <div className='flex mb-6 items-center  justify-between w-[13.12rem] h-[2.06rem]  rounded-r-md bg-white'>
-          <button
-            type='submit'
-            className='rounded-l-md bg-[#3354F4] flex-shrink-0 flex-grow-0 basis-[3rem] h-full  '
-          >
-            <Search
-              className='mx-auto'
-              color='white'
-              width={'1.25rem'}
-              height={'1.25rem'}
-            />
-          </button>
-          <input
-            dir={dir}
-            placeholder='جست وجو...'
-            value={globalFilter ?? ''}
-            onChange={(e) => setGlobalFilter(String(e.target.value))}
-            className='outline-none rounded-r-md px-[.5rem]  !w-full h-full border border-gray-200 '
-          />
-        </div>
+      <div dir={dir} className='flex items-baseline justify-between'>
         <div className='flex items-center'>
           <span className='text-sm'>ورودی</span>
           <select
@@ -259,6 +239,29 @@ export function DataTable<TData, TValue>({ columns, data, dir = 'rtl' }) {
             ))}
           </select>
           <span className='text-sm'>نمایش</span>
+        </div>
+        <div
+          className={`${
+            dir === 'ltr' && 'flex-row-reverse'
+          } flex  mb-6 items-center  justify-between w-[13.12rem] h-[2.06rem]  rounded-r-md bg-white`}
+        >
+          <input
+            placeholder='جست وجو...'
+            value={globalFilter ?? ''}
+            onChange={(e) => setGlobalFilter(String(e.target.value))}
+            className='outline-none rounded-r-md px-[.5rem]  !w-full h-full border border-gray-200 '
+          />
+          <button
+            type='submit'
+            className='rounded-l-md bg-[#3354F4] flex-shrink-0 flex-grow-0 basis-[3rem] h-full  '
+          >
+            <Search
+              className='mx-auto'
+              color='white'
+              width={'1.25rem'}
+              height={'1.25rem'}
+            />
+          </button>
         </div>
         {/* <DirectionProvider dir='rtl'>
           <Dialog>

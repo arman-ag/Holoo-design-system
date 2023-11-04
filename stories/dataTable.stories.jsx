@@ -171,6 +171,6 @@ const columns = [
 
 export const DataTableDemo = () => {
     return (
-        <DataTable dir="rtl" columns={columns} data={data} />
+        <DataTable columns={columns} data={data} />
     )
 }

@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { Button } from '../src/components/buttons';
 
-import DateSelector from "../src/components/dateSelector/index.tsx";
 import { Form, FormControl, FormField, FormItem } from '../src/components/form';
+import TimeSelector from "../src/components/timeSelector/index.tsx";
 export default {
-    title: "date selector",
-    component: DateSelector,
+    title: "time selector",
+    component: TimeSelector,
     parameters: {
         layout: "centered"
     },
@@ -32,12 +32,10 @@ export const dataSelector = (args) => {
                     render={({ field }) => (
                         <FormItem>
                             <FormControl>
-                                <DateSelector
-                                    placeholder="وارد کردن تاریخ"
-                                    range
-                                    dateSeparator=" تا "
+                                <TimeSelector
+                                    placeholder="وارد کردن زمان"
                                     size={"lg"}
-                                    label="تاریخ"
+                                    label="زمان"
                                     id={5}
                                     {...field}
                                 />

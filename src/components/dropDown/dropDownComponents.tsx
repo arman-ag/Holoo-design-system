@@ -4,7 +4,6 @@ import { Search, Triangle } from 'lucide-react';
 import React, { useState } from 'react';
 import { components } from 'react-select';
 import { cn } from '../../lib/utils';
-import { FormLabel } from '../form';
 import {
   Tooltip,
   TooltipContent,
@@ -141,17 +140,7 @@ const DropdownIndicator = (props) => {
   );
 };
 const Control = ({ error, children, ...props }) => {
-  return (
-    <components.Control {...props}>
-      {children}
-      <FormLabel
-        htmlFor={props?.selectProps.inputId}
-        className={cn('absolute bottom-[45px] text-base  text-inherit')}
-      >
-        {props.selectProps.label}
-      </FormLabel>
-    </components.Control>
-  );
+  return <components.Control {...props}>{children}</components.Control>;
 };
 const SingleValue = ({ children, ...innerProps }) => {
   return (

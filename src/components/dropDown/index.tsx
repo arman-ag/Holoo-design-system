@@ -35,7 +35,10 @@ const DropDown = ({
 }: dropDownProps) => {
   const { error } = useFormField();
   return (
-    <div className='h-[56px]' dir={dir}>
+    <div className='h-[3.5rem] ' dir={dir}>
+      <label className='mr-[1rem] font-yekan text-[.75rem] mb-[1rem]'>
+        {props.label}
+      </label>
       <Select
         inputId={id}
         closeMenuOnSelect={!multiItem}

@@ -1,6 +1,7 @@
 export * from './buttons';
 export * from './checkbox';
 export * from './dataTable';
+export * from './dateSelector';
 export * from './dialog';
 export * from './dropDown/index';
 export * from './dropdown-menu';
@@ -12,6 +13,7 @@ export * from './switch';
 export * from './table';
 export * from './tabs';
 export * from './textarea';
+export * from './timeSelector';
 export * from './toast/index';
 export * from './toast/use-toast';
 export * from './tooltip';
