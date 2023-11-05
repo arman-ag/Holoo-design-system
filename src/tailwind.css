@@ -10,10 +10,7 @@
     -moz-appearance: textfield !important;
   }
 }
-@font-face {
-  font-family: 'Yekan';
-  src: url('./assets/fonts/YekanBakhFaNum.ttf') format('truetype');
-}
+
 :root {
   --primary180: #02121c;
   --primary170: #031b2a;

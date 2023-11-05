@@ -3,9 +3,7 @@ module.exports = {
   darkMode: ["class", '[data-mode="dark"]'],
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
   theme: {
-    fontFamily: {
-      yekan: 'Yekan',
-    },
+
     extend: {
       padding: {
         2: "0.125rem",
