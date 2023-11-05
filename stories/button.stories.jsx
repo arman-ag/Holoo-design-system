@@ -60,7 +60,7 @@ export const ltrIcon = {
 
   render: () => (
     <>
-      <Button size={"sm"} >
+      <Button size={"sm"}  >
         <div className='flex items-center '>
           <span style={{ marginRight: "10px" }}>
             < svg
@@ -100,7 +100,7 @@ export const RtlIcon = {
 
   render: () => (
     <>
-      <Button size={"sm"} dir='rtl'>
+      <Button size={"sm"} dir='rtl' >
         <div className='flex items-center '>
           <span style={{ marginLeft: "10px" }}>
             < svg

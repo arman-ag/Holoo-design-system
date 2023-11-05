@@ -3,6 +3,9 @@ module.exports = {
   darkMode: ["class", '[data-mode="dark"]'],
   content: ['./src/**/*.{html,js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      yekan: 'Yekan',
+    },
     extend: {
       padding: {
         2: "0.125rem",
@@ -102,9 +105,7 @@ module.exports = {
         primary10: "var(--primary10)",
       },
 
-      fontFamily: {
-        yekan: 'Yekan',
-      },
+
       keyframes: {
         "accordion-down": {
           from: { height: 0 },

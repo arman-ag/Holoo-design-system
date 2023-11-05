@@ -16,6 +16,7 @@ const DateSelector = ({ label, size, placeholder, ...props }) => {
       {...props}
       render={
         <Input
+          autoComplete='off'
           dir='rtl'
           placeholder={placeholder}
           label={label}

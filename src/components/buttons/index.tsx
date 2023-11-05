@@ -6,11 +6,11 @@ import * as React from 'react';
 import { cn } from '../../lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center text-light-gray-text	 rounded-16 transition-colors  focus-visible:outline-none font disabled:pointer-events-none disabled:opacity-50 @apply font-yekan',
+  'inline-flex items-center justify-center text-light-gray-text	 rounded-16 transition-colors  focus-visible:outline-none font disabled:pointer-events-none disabled:opacity-50 @apply ',
   {
     variants: {
       variant: {
-        fill: ' bg-primary100 hover:bg-primary120 text-light-gray-text active:bg-primary120 focus:bg-primary130 dark:bg-primary70 dark:hover:bg-primary60  dark:active:bg-primary60 dark:focus:bg-primary50',
+        fill: ' !bg-primary100 hover:!bg-primary120 !text-light-gray-text active:!bg-primary120 focus:!bg-primary130 dark:!bg-primary70 dark:hover:!bg-primary60  dark:active:!bg-primary60 dark:focus:!bg-primary50',
         outline:
           'border-2 border-primary100 text-primary100 hover:text-primary120 hover:bg-primary10 active:bg-primary10 active:text-primary120 focus:text-primary130 focus:bg-primary20 dark:text-primary70 dark:border-primary70 dark:hover:bg-primary160 dark:focus:bg-primary160 dark:focus:bg-primary130 ',
         text: '!px-0 !py-0 !w-fit text-primary100  hover:text-primary120 active:text-primary120 focus:text-primary130  dark:text-primary70 dark:focus:text-primary50',

@@ -13,9 +13,9 @@ const inputVariants = cva(
   {
     variants: {
       inputSize: {
-        sm: 'h-32 py-[.5rem] px-12 ',
-        md: 'h-40 py-12 px-16',
-        lg: 'p-16 h-48',
+        sm: 'h-32 py-[.5rem] px-12 !text-[.9rem]',
+        md: 'h-40 py-12 px-16 !text-[1rem]',
+        lg: 'p-16 h-48 !text-[1.2rem]',
       },
     },
     defaultVariants: {
@@ -35,14 +35,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     { label, inputSize, disabled, className, dir, type, name, ...props },
     ref,
   ) => {
+    const inputRef = React.useRef(null);
+    React.useImperativeHandle(ref, () => inputRef.current!, []);
     const [showPassword, setShowPassword] = React.useState(false);
     const { error, formItemId } = useFormField();
-
     const changeAction = () => {
       if (type === 'password') {
         return showPassword ? (
           <span
-            className='cursor-pointer text-dark-gray-text dark:text-light-gray-inactivestates'
+            className='cursor-pointer text-dark-gray-text dark:text-light-gray-inactivestates w-fit'
             onClick={() => {
               setShowPassword(false);
             }}
@@ -51,7 +52,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           </span>
         ) : (
           <span
-            className='cursor-pointer text-dark-gray-text dark:text-light-gray-inactivestates'
+            className='cursor-pointer text-dark-gray-text dark:text-light-gray-inactivestates w-fit'
             onClick={() => {
               setShowPassword(true);
             }}
@@ -68,7 +69,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         );
       }
     };
-
+    const activeElement = () => {
+      inputRef.current.focus();
+    };
     return (
       <div
         dir={dir}
@@ -87,6 +90,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         </FormLabel>
         <FormControl>
           <div
+            onClick={activeElement}
             className={cn(
               inputVariants({ inputSize, className }),
               disabled && 'opacity-50  focus-within:border-opacity-50',
@@ -96,14 +100,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             )}
           >
             <input
+              ref={inputRef}
               disabled={disabled}
               id={formItemId}
               type={showPassword ? 'text' : type}
               className={cn(
-                'bg-inherit text-base focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text dark:text-light-gray-inactivestates',
+                'bg-inherit w-full  text-base focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 text-dark-gray-text dark:text-light-gray-inactivestates',
                 className,
               )}
-              ref={ref}
               {...props}
             />
             {changeAction()}

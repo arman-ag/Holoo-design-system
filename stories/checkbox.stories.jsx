@@ -1,5 +1,6 @@
 import React from "react";
 import { Checkbox } from "../src/components/checkbox";
+import { Label } from "../src/components/label";
 export default {
     title: 'Checkbox',
     component: Checkbox,
@@ -15,7 +16,12 @@ export default {
     },
 };
 export const checkbox = (args) => {
-    return (<div>
+    return (<div style={{
+        display: "flex",
+        alignItems: "center",
+
+    }} >
+        <Label style={{ marginRight: ".5rem" }} className="">متن تست</Label>
         <Checkbox {...args} />
     </div>)
 }

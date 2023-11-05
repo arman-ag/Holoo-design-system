@@ -36,6 +36,7 @@ export const password = (args) => {
         alert(data.password)
 
     }
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
@@ -45,7 +46,9 @@ export const password = (args) => {
                     render={({ field }) => (
 
                         <FormItem>
-                            <Input label={"پسورد"} type="password" placeholder="password"  {...args} {...field} />
+
+                            <Input
+                                label={"پسورد"} type="password" placeholder="password"  {...args} {...field} />
 
                         </FormItem>
                     )}
