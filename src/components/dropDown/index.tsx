@@ -36,7 +36,7 @@ const DropDown = ({
   const { error } = useFormField();
   return (
     <div className='h-[3.5rem] ' dir={dir}>
-      <label className='mr-[1rem] font-yekan text-[.75rem] mb-[1rem]'>
+      <label className='mr-[1rem]  text-[.75rem] mb-[1rem]'>
         {props.label}
       </label>
       <Select
@@ -55,7 +55,7 @@ const DropDown = ({
             return cn(
               error && '!text-light-error-100 !border-light-error-100',
               disabled && 'opacity-70  cursor-not-allowed ',
-              'border rounded-lg text-sm my-[.5rem] border-light-gray-inactivestates text-light-gray-secondarytext font-yekan px-[12px]',
+              'border rounded-lg text-sm my-[.5rem] border-light-gray-inactivestates text-light-gray-secondarytext  px-[12px]',
               state.menuIsOpen &&
                 'border-primary100   text-primary100 rounded-none !rounded-t-lg ',
             );
@@ -68,9 +68,7 @@ const DropDown = ({
             return cn('mx-[5px]');
           },
           menu: () => {
-            return cn(
-              'font-yekan border rounded-b-8 bg-[#eef4f7]  text-sm shadow-md ',
-            );
+            return cn(' border rounded-b-8 bg-[#eef4f7]  text-sm shadow-md ');
           },
           placeholder: (state) => {
             return cn(state.selectProps.menuIsOpen && 'hidden');
@@ -81,7 +79,7 @@ const DropDown = ({
             );
           },
           noOptionsMessage: () => {
-            return cn('font-yekan p-[.5rem');
+            return cn(' p-[.5rem');
           },
         }}
         components={{

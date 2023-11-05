@@ -36,7 +36,7 @@ const TabsTrigger = React.forwardRef<
       halfBorder
         ? "relative after:rounded-t-8 after:content-['']  after:mt-[.5rem] after:bg-primary100 after:h-[3px] data-[state=active]:after:w-[20px] after:absolute after:bottom-0  "
         : ' border-primary100 data-[state=active]:border-b-2   data-',
-      'box-content data-[state=active]:text-primary100 min-h-[40px] font-yekan  inline-flex  items-center justify-center whitespace-nowrap  px-16  py-1.5 text-sm text-light-gray-secondarytext font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50   data-[state=inactive]:hover:bg-primary10',
+      'box-content data-[state=active]:text-primary100 min-h-[40px]  inline-flex  items-center justify-center whitespace-nowrap  px-16  py-1.5 text-sm text-light-gray-secondarytext font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50   data-[state=inactive]:hover:bg-primary10',
       className,
     )}
     {...props}

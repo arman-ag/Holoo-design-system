@@ -221,7 +221,7 @@ export function DataTable<TData, TValue>({ columns, data, dir = 'rtl' }) {
     }
   }, [table.getState().columnFilters[0]?.id]);
   return (
-    <div className='font-yekan w-full'>
+    <div className=' w-full'>
       <div dir={dir} className='flex items-baseline justify-between'>
         <div className='flex items-center'>
           <span className='text-sm'>ورودی</span>

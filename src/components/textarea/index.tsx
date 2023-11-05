@@ -16,7 +16,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         className={cn(
           error &&
             ' active:text-light-error- focus-within:text-light-error-100',
-          'focus-within:text-primary100  font-yekan dark:text-dark-gray-secondarytext  ',
+          'focus-within:text-primary100   dark:text-dark-gray-secondarytext  ',
         )}
         dir={dir}
       >

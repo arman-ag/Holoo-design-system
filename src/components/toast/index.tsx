@@ -19,16 +19,22 @@ export function Toaster({ dir = 'rtl' }) {
       {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
           <Toast key={id} {...props}>
-            <div className='grid gap-1 '>
-              {title && <ToastTitle>{title}</ToastTitle>}
+            <div className='grid  '>
+              {title && (
+                <div className='flex items-start mt-[.5rem] justify-between'>
+                  <ToastTitle>{title}</ToastTitle>
+                  <div className='flex'>
+                    {action}
+                    <ToastClose dir={dir} />
+                  </div>
+                </div>
+              )}
               {description && (
-                <ToastDescription className='w-11/12'>
-                  {description}
-                </ToastDescription>
+                <div>
+                  <ToastDescription>{description}</ToastDescription>
+                </div>
               )}
             </div>
-            {action}
-            <ToastClose dir={dir} />
           </Toast>
         );
       })}
