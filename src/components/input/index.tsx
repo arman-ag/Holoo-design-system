@@ -76,7 +76,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div
         dir={dir}
         className={cn(
-          'font-yekan text-light-gray-secondarytext ',
+          ' text-light-gray-secondarytext ',
           error
             ? ' - focus-within:text-light-error-100'
             : 'focus-within:text-primary100 ',
