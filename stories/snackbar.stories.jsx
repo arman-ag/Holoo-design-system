@@ -22,10 +22,10 @@ export const snackBars = () => {
             <Button
                 onClick={() => {
                     toast({
-                        title: "تست نوتیفیکیشن",
-                        description: "لورم ایپسوم متن ساختگی با تولید ن بلکه  موجود طراحی اساسا مورد استفاده قرار گیرد  لورم ایپسوم متن ساختگی با تولید ",
+
+                        description: "لورم ایپسوم متن ساختگی با تولید ن",
                         action: <button>
-                            action
+                            دکمه
                         </button>
 
                     })
