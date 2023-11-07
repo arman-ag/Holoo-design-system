@@ -1,4 +1,5 @@
 // @ts-nocheck
+'use client';
 
 import React from 'react';
 import Select from 'react-select';
@@ -19,7 +20,7 @@ interface dropDownProps {
   searchable?: boolean;
   disabled?: boolean;
   noOptionsMessage?: string;
-  id?: number;
+  id?: string;
   options: { value: string; label: string }[];
 }
 
@@ -31,13 +32,18 @@ const DropDown = ({
   disabled,
   noOptionsMessage,
   id,
+  label,
   ...props
 }: dropDownProps) => {
   const { error } = useFormField();
   return (
-    <div className='h-[3.5rem] ' dir={dir}>
-      <label className='mr-[1rem]  text-[.75rem] mb-[1rem]'>
-        {props.label}
+    <div className='h-[3.5rem] text-light-gray-secondarytext  ' dir={dir}>
+      <label
+        className={`mr-[1rem]  text-[.75rem] mb-[1rem] ${
+          disabled && 'opacity-50 '
+        } ${error && ' text-light-error-100'}`}
+      >
+        {label}
       </label>
       <Select
         inputId={id}

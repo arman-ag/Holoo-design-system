@@ -84,7 +84,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
       >
         <FormLabel
-          className={cn('text-sm  mx-16  ', disabled && 'opacity-50 ')}
+          className={cn('text-[.75rem]  mx-16  ', disabled && 'opacity-50 ')}
         >
           {label}
         </FormLabel>
