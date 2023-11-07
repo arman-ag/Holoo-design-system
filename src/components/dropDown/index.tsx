@@ -4,7 +4,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { cn } from '../../lib/utils';
-import { useFormField } from '../form';
+import { FormLabel, useFormField } from '../form';
 import {
   Control,
   DropdownIndicator,
@@ -36,16 +36,26 @@ const DropDown = ({
   ...props
 }: dropDownProps) => {
   const { error } = useFormField();
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? 'blue' : 'white',
+      color: state.isSelected ? 'white' : 'black',
+    }),
+  };
   return (
-    <div className='h-[3.5rem] text-light-gray-secondarytext  ' dir={dir}>
-      <label
-        className={`mr-[1rem]  text-[.75rem] mb-[1rem] ${
+    <div className='h-[3.5rem] focus:text-primary100 ' dir={dir}>
+      <FormLabel
+        htmlFor='my-select'
+        className={`mr-[1rem] text-light-gray-secondarytext  text-[.75rem] mb-[1rem] ${
           disabled && 'opacity-50 '
-        } ${error && ' text-light-error-100'}`}
+        }  focus-within:text-primary100 `}
       >
         {label}
-      </label>
+      </FormLabel>
       <Select
+        styles={customStyles}
+        aria-labelledby='my-select'
         inputId={id}
         closeMenuOnSelect={!multiItem}
         hideSelectedOptions={false}
@@ -63,7 +73,7 @@ const DropDown = ({
               disabled && 'opacity-70  cursor-not-allowed ',
               'border rounded-lg text-sm my-[.5rem] border-light-gray-inactivestates text-light-gray-secondarytext  px-[12px]',
               state.menuIsOpen &&
-                'border-primary100   text-primary100 rounded-none !rounded-t-lg ',
+                'border-primary100   text-primary100 rounded-none !rounded-t-lg  ',
             );
           },
           valueContainer: () => {
@@ -76,6 +86,7 @@ const DropDown = ({
           menu: () => {
             return cn(' border rounded-b-8 bg-[#eef4f7]  text-sm shadow-md ');
           },
+
           placeholder: (state) => {
             return cn(state.selectProps.menuIsOpen && 'hidden');
           },
